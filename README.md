@@ -2,7 +2,7 @@
 
 ##About
 
-persian-datepicker is A lightweight jQuery plugin that select persian(jalali) date. 
+persianDatepicker is A lightweight jQuery plugin that select persian(jalali) date. 
   
 - **Light weight:** ~14k minified
 - **Beautiful themes:**
@@ -14,11 +14,11 @@ persian-datepicker is A lightweight jQuery plugin that select persian(jalali) da
 
 
 ##Usage
-1- include jQuery & persianDatePicker.js & persianDatePicker.css
+1- include jQuery & persianDatepicker.js & persianDatepicker.css
 ```html
-<link type="text/css" rel="stylesheet" href="css/persianDatePicker.css" />
+<link type="text/css" rel="stylesheet" href="css/persianDatepicker.css" />
 <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="js/persianDatePicker.min.js"></script>
+<script type="text/javascript" src="js/persianDatepicker.min.js"></script>
 ```
 2- add your html element (input or span or etc)
 ```html
@@ -29,7 +29,7 @@ persian-datepicker is A lightweight jQuery plugin that select persian(jalali) da
 ```html
 <script type="text/javascript">
     $(function() {
-        $("#input1, #span1").prDatePicker();       
+        $("#input1, #span1").persianDatePicker();       
     });
 </script>
 ```
@@ -38,7 +38,7 @@ persian-datepicker is A lightweight jQuery plugin that select persian(jalali) da
 ##Options
 To customize persian datepicker, simply pass in an options object: (defaults shown)
 ```javascript
-$("#input1")prDatePicker({
+$("#input1")persianDatePicker({
     months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
     dowTitle: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
     shortDowTitle: ["ش", "ی", "د", "س", "چ", "پ", "ج"],
