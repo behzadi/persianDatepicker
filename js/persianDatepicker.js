@@ -268,8 +268,7 @@
                             getSelectableYears(firstYear, 0);
                         }
 						
-                        _com = $(this).scrollTop().toString().length*100;
-						console.log("h:"+lisHeight + " s:"+ $(this).scrollTop()+" :"+_com);
+                        _com = $(this).scrollTop().toString().length*100;						
                         if ((lisHeight - $(this).scrollTop()) > -_com && (lisHeight - $(this).scrollTop()) < _com) {
                             getSelectableYears(0, lastYear);
                             $(this).scrollTop($(this).scrollTop() - 50);
