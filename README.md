@@ -4,6 +4,7 @@
 
 persianDatepicker is A lightweight jQuery plugin that select persian(jalali) date. 
   
+- **Browsers:** >IE8, Chrome, Firefox, safari, opera  
 - **Light weight:** ~14k minified
 - **Beautiful themes:** soon
 - **Size and font:** set the size (width & height) and fontsize for datepicker cells
