@@ -1,4 +1,4 @@
-##[Demo and information](http://mbehzadi.com/persian-datepicker "mbehzadi.com")
+##[Demos and information](http://mbehzadi.com/persian-datepicker "mbehzadi.com")
 
 ##About
 
