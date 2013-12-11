@@ -198,8 +198,8 @@
                     //_yearSelect.children().remove();
                     var pre = !1;
                     if (f === undefined && l === undefined) {
-                        b = self.persianDate.year - 10;
-                        a = self.persianDate.year + 14;
+                        b = self.persianDate.year - 19;
+                        a = self.persianDate.year + 29;
                     } else if (l == 0) {
                         a = f;
                         b = a - 6;
@@ -262,18 +262,21 @@
                         c = $(this).find("li").length;
                         firstYear = parseInt($(this).find("li:first").val());
                         lastYear = parseInt($(this).children("li:last").val());
-                        lisHeight = c / 3 * ($(this).find("li:first").height()+5);
+                        lisHeight = c / 3 * ($(this).find("li:first").height()+4);
                         _com = $(this).scrollTop().toString().length*500;
                         if ($(this).scrollTop() < _com.toString().length*1000 && firstYear>=1) {
                             getSelectableYears(firstYear, 0);
-                        }                            
-                        _com = $(this).scrollTop().toString().length*500;
+                        }
+						
+                        _com = $(this).scrollTop().toString().length*100;
+						console.log("h:"+lisHeight + " s:"+ $(this).scrollTop()+" :"+_com);
                         if ((lisHeight - $(this).scrollTop()) > -_com && (lisHeight - $(this).scrollTop()) < _com) {
                             getSelectableYears(0, lastYear);
                             $(this).scrollTop($(this).scrollTop() - 50);
                         }
-                        if ($(this).scrollTop() < _com.toString().length)
-                            $(this).scrollTop(_com.toString().length*1000);                        
+                        if ($(this).scrollTop() < _com.toString().length){
+                            $(this).scrollTop(_com.toString().length*500);
+						}							
                     }
                 });
                 _monthYear.append(_monthSelect).append(_yearSelect);
