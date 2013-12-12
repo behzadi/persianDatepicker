@@ -329,7 +329,7 @@
                                 _selday = 'selday';
                             _fri = col == 6 ? 'friday' : '';
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + '" ' + self.cellStyle + ' />');
-                            _cell.data("date", {jDateFunctions: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt)._toString(self.options.formatDate)});
+                            _cell.data("date", {jDate: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt)._toString(self.options.formatDate)});
                             _cell
                                     .html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(cellIndex - _start + 1) : cellIndex - _start + 1)
                                     .bind("click", function() {
@@ -338,7 +338,7 @@
                                         if (self.options.showGregorianDate)
                                             self.showDate(self.el, $(this).data('date').gDate);
                                         else
-                                            self.showDate(self.el, self.persianDate.parse($(this).data('date').jDateFunctions).toString(self.options.formatDate));
+                                            self.showDate(self.el, self.persianDate.parse($(this).data('date').jDate).toString(self.options.formatDate));
                                         self.calendar.hide();
                                     });
                         }
@@ -355,16 +355,16 @@
 
                 if (self.options.selectableMonths._indexOf(self.persianDate.month) > -1) {
                     _goToday = $('<a class="goToday" />');
-                    _goToday.data("date", {jDate: self.now().toString(self.options.formatDate), gDate: self.jDateFunctions.getGDate(self.now())._toString(self.options.formatDate)});
+                    _goToday.data("date", {jDate: self.now().toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(self.now())._toString(self.options.formatDate)});
                     _goToday
                             .attr("href", "javascript:;")
                             .html('هم اکنون')
                             .bind("click", function() {
                                 self.persianDate = self.now();
                                 if (self.options.showGregorianDate)
-                                    self.showDate(self.el, $(this).data('date').gDate);
+                                    self.showDate(self.el, $(this).data('date').gDate._toString(self.options.formatDate));
                                 else
-                                    self.showDate(self.el, self.persianDate.parse($(this).data('date').jDate).toString(self.options.formatDate));
+                                    self.showDate(self.el, self.persianDate.parse($(this).data('date').jDate).toString(self.options.formatDate));								
                                 self.calendar.find(".day").removeClass("selday");
                                 self.render();
                                 self.calendar.find(".today").addClass("selday");
