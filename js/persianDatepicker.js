@@ -61,13 +61,13 @@
             self.options = $.extend(true, {}, defaults, userOptions);
             var options = self.options;
 
-            _fontSize = self.options.fontSize;
-            self.cellStyle = "style='width:" + self.options.cellWidth + "px;height:" + self.options.cellHeight + "px;line-height:" + self.options.cellHeight + "px; font-size:" + (_fontSize) + "px; ' ";
-            self.headerStyle = "style='height:" + self.options.cellHeight + "px;line-height:" + self.options.cellHeight + "px; font-size:" + (_fontSize + 4) + "px;' ";
-            self.selectUlStyle = "style='margin-top:" + self.options.cellHeight + "px;height:" + (self.options.cellHeight * 7 + 20) + "px; font-size:" + (_fontSize-2) + "px;' ";
-            self.selectMonthLiStyle = "style='height:" + (self.options.cellHeight * 7 + 7) / (4) + "px;line-height:" + (self.options.cellHeight * 7 + 7) / (4) + "px; width:" + (7 * self.options.cellWidth + 1) / (3) + "px;width:" + (7 * self.options.cellWidth) / (3) + "px\\9;' ";
-            self.selectYearLiStyle = "style='height:" + (self.options.cellHeight * 7 + 10) / (6) + "px;line-height:" + (self.options.cellHeight * 7 + 10) / (6) + "px; width:" + (7 * self.options.cellWidth - 14) / (3) + "px;width:" + (7 * self.options.cellWidth - 15) / (3) + "px\\9;' ";
-            self.footerStyle = "style='height:" + self.options.cellHeight + "px;line-height:" + self.options.cellHeight + "px; font-size:" + _fontSize + "px;' ";
+            _fontSize = self.options.fontSize;_cw = parseInt(self.options.cellWidth); _ch=parseInt(self.options.cellHeight);			
+            self.cellStyle = "style='width:" + _cw + "px;height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + (_fontSize) + "px; ' ";
+            self.headerStyle = "style='height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + (_fontSize + 4) + "px;' ";
+            self.selectUlStyle = "style='margin-top:" + _ch + "px;height:" + (_ch * 7 + 20) + "px; font-size:" + (_fontSize-2) + "px;' ";
+            self.selectMonthLiStyle = "style='height:" + (_ch * 7 + 7) / (4) + "px;line-height:" + (_ch * 7 + 7) / (4) + "px; width:" + (7 * _cw + 1) / (3) + "px;width:" + (7 * _cw) / (3) + "px\\9;' ";
+            self.selectYearLiStyle = "style='height:" + (_ch * 7 + 10) / (6) + "px;line-height:" + (_ch * 7 + 10) / (6) + "px; width:" + (7 * _cw - 14) / (3) + "px;width:" + (7 * _cw - 15) / (3) + "px\\9;' ";
+            self.footerStyle = "style='height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + _fontSize + "px;' ";
 
             self.jDateFunctions = new jDateFunctions();
             _persianDate = self.now();
@@ -198,20 +198,20 @@
                     //_yearSelect.children().remove();
                     var pre = !1;
                     if (f === undefined && l === undefined) {
-                        b = self.persianDate.year - 19;
-                        a = self.persianDate.year + 29;
-                    } else if (l == 0) {
-                        a = f;
-                        b = a - 6;
+                        b = self.persianDate.year - 7;
+                        a = self.persianDate.year + 14;
+                    } else if (l == 0) {						
+                        b = f - 6;
+                        a = f;						
                         pre = !0;
                     } else if (f == 0) {
-                        b = l;
+                        b = l +1;
                         a = b + 6;
                     }
                     var arr = [];
-                    for (i = b; i < a && a > 0; i++)
-                        arr.push(parseInt(i));
-                    $.each(self.options.selectableYears || arr, function(i, v) {
+                    for (i = b; i < a && b > 0; i++)
+                        arr.push(parseInt(i));					
+                    $.each(self.options.selectableYears || (pre)?arr.reverse():arr, function(i, v) {
                         var o = $('<li ' + self.selectYearLiStyle + ' />').html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(v) : v);
                         if (v == self.persianDate.year) {
                             o.addClass('selected');
@@ -222,7 +222,7 @@
                             self.persianDate.year = parseInt(v);
                             self.render();
                         });
-                        (pre) ? _yearSelect.prepend(o) : _yearSelect.append(o);
+                        (pre) ? _yearSelect.prepend(o) : _yearSelect.append(o);						
                     });
                 };
                 getSelectableYears();
@@ -260,11 +260,11 @@
                 _yearSelect.bind("scroll", function() {
                     if (self.options.selectableYears == undefined) {
                         c = $(this).find("li").length;
-                        firstYear = parseInt($(this).find("li:first").val());
+                        firstYear = parseInt($(this).children("li:first").val());
                         lastYear = parseInt($(this).children("li:last").val());
                         lisHeight = c / 3 * ($(this).find("li:first").height()+4);
                         _com = $(this).scrollTop().toString().length*500;
-                        if ($(this).scrollTop() < _com.toString().length*1000 && firstYear>=1) {
+                        if ($(this).scrollTop() < _com.toString().length*100 && firstYear>=1) {
                             getSelectableYears(firstYear, 0);
                         }
 						
@@ -273,8 +273,8 @@
                             getSelectableYears(0, lastYear);
                             $(this).scrollTop($(this).scrollTop() - 50);
                         }
-                        if ($(this).scrollTop() < _com.toString().length){
-                            $(this).scrollTop(_com.toString().length*500);
+                        if ($(this).scrollTop() < _com.toString().length && firstYear>=30){
+                            $(this).scrollTop(_com.toString().length*100);
 						}							
                     }
                 });
