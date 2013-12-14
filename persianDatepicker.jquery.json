@@ -1,7 +1,7 @@
 {
     "name": "persianDatepicker",
     "title": "jQuery persian datepicker",
-    "description": "jQuery plugin for select persian date.",
+    "description": "A lightweight jQuery plugin for select persian date, work on >IE8, Chrome, Firefox, Safari, Opera ",
     "keywords": [
         "persian",
         "persianDatepicker",
