@@ -211,7 +211,7 @@
                     var arr = [];
                     for (i = b; i < a && b > 0; i++)
                         arr.push(parseInt(i));					
-                    $.each(self.options.selectableYears || (pre)?arr.reverse():arr, function(i, v) {
+                    $.each(self.options.selectableYears || ((pre)?arr.reverse():arr), function(i, v) {
                         var o = $('<li ' + self.selectYearLiStyle + ' />').html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(v) : v);
                         if (v == self.persianDate.year) {
                             o.addClass('selected');
