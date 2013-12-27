@@ -61,9 +61,9 @@
             self.options = $.extend(false, {}, defaults, userOptions);
             var options = self.options;
 
-            _fontSize = self.options.fontSize;
-            _cw = parseInt(self.options.cellWidth);
-            _ch = parseInt(self.options.cellHeight);
+            _fontSize = options.fontSize;
+            _cw = parseInt(options.cellWidth);
+            _ch = parseInt(options.cellHeight);
             self.cellStyle = "style='width:" + _cw + "px;height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + (_fontSize) + "px; ' ";
             self.headerStyle = "style='height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + (_fontSize + 4) + "px;' ";
             self.selectUlStyle = "style='margin-top:" + _ch + "px;height:" + (_ch * 7 + 20) + "px; font-size:" + (_fontSize - 2) + "px;' ";
@@ -73,15 +73,15 @@
 
             self.jDateFunctions = new jDateFunctions();
             _persianDate = self.now();
-            if (self.options.selectableYears != undefined && self.options.selectableYears._indexOf(_persianDate.year) == -1)
-                _persianDate.year = this.options.selectableYears[0];
+            if (options.selectableYears != undefined && options.selectableYears._indexOf(_persianDate.year) == -1)
+                _persianDate.year = options.selectableYears[0];
             if (self.options.selectableMonths._indexOf(_persianDate.month) == -1)
-                _persianDate.month = this.options.selectableMonths[0];
+                _persianDate.month = options.selectableMonths[0];
 
             self.persianDate = _persianDate;
             self._id = 'pdp-' + Math.round(Math.random() * 1e7);
-            self.persianDate.formatDate = self.options.formatDate;
-            self.calendar = $('<div id="' + self._id + '" class="pdp-' + self.options.theme + '" />')
+            self.persianDate.formatDate = options.formatDate;
+            self.calendar = $('<div id="' + self._id + '" class="pdp-' + options.theme + '" />')
 
             if (!(el.attr('pdp-id') || '').length) {
                 el.attr('pdp-id', self._id);
@@ -95,11 +95,11 @@
                     .bind('focus', function(e) {
                         self.show(e);
                     });
-            if (self.options.selectedBefore && !self.options.showGregorianDate)
-                self.showDate(el, self.now().toString(self.options.formatDate));
-            if (self.options.selectedBefore && self.options.showGregorianDate)
+            if (options.selectedBefore && !options.showGregorianDate)
+                self.showDate(el, self.now().toString(options.formatDate));
+            if (options.selectedBefore && options.showGregorianDate)
                 self.showDate(el, self.now().gDate._toString(self.options.formatDate));
-            if (self.options.isRTL)
+            if (options.isRTL)
                 el.addClass('rtl');
             if (self.calendar.length && !options.alwaysShow) {
                 self.calendar.hide();
@@ -110,11 +110,11 @@
                 if (!el.is(target) && !calendar.is(target) && calendar.has(target).length === 0 && calendar.is(':visible')) {
                     self.hide();
                 }
-                var container = $(".pdp-" + self.options.theme + " .yearSelect");
+                var container = $(".pdp-" + options.theme + " .yearSelect");
                 if (!container.is(e.target) && container.has(e.target).length === 0) {
                     container.hide();
                 }
-                container = $(".pdp-" + self.options.theme + " .monthSelect");
+                container = $(".pdp-" + options.theme + " .monthSelect");
                 if (!container.is(e.target) && container.has(e.target).length === 0) {
                     container.hide();
                 }
@@ -123,8 +123,8 @@
                 var elPos = el.offset();
                 self.calendar.css(
                         {
-                            top: (elPos.top + el.outerHeight() + self.options.calendarPosition.y) + 'px',
-                            left: (elPos.left + self.options.calendarPosition.x) + 'px'
+                            top: (elPos.top + el.outerHeight() + options.calendarPosition.y) + 'px',
+                            left: (elPos.left + options.calendarPosition.x) + 'px'
                         });
             };
             $(window).resize(onResize);
@@ -232,15 +232,15 @@
                 // selectable months                
                 for (i = 1; i <= 12; i++) {
                     var m = self.options.months[i - 1];                    
-                        var o = (self.options.selectableMonths._indexOf(i) == -1) ? $('<li class="desableMonth" ' + self.selectMonthLiStyle + ' />').html(m) : $('<li ' + self.selectMonthLiStyle + ' />').html(m);                               
+                        var o = (self.options.selectableMonths._indexOf(i) == -1) ? $('<li class="disableMonth" ' + self.selectMonthLiStyle + ' />').html(m) : $('<li ' + self.selectMonthLiStyle + ' />').html(m);                               
                     if (i + 1 == self.persianDate.month) {
                         o.addClass('selected');
                     }
-                    o.data('month', m);
-                    if (!o.hasClass('desableMonth')) {
+                    o.data('month', {month: m, monthNum: i});
+                    if (!o.hasClass('disableMonth')) {
                         o.bind("click", function() {
-                            self.persianDate.date = 1;
-                            self.persianDate.month = parseInt(i);
+                            self.persianDate.date = 1;							
+                            self.persianDate.month = $(this).data('month').monthNum;
                             self.render();
                         });
                     }
