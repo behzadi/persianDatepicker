@@ -34,6 +34,7 @@
                 persianNumbers: !0,
                 formatDate: "YYYY/MM/DD",
                 selectedBefore: !1,
+                selectedDate: null,
                 prevArrow: '\u25c4',
                 nextArrow: '\u25ba',
                 theme: 'default',
@@ -48,13 +49,9 @@
                     x: 0,
                     y: 0,
                 },
-                onShow: function(calendar) {
-                    calendar.show();
-                },
-                onHide: function(calendar) {
-                    calendar.hide();
-                },
-                OnSelect: function () {}
+                onShow: function () {},
+                onHide: function () {},
+                onSelect: function () {}
             };
             var self = this;
             self.el = $(element);
@@ -78,8 +75,10 @@
                 _persianDate.year = options.selectableYears[0];
             if (self.options.selectableMonths._indexOf(_persianDate.month) == -1)
                 _persianDate.month = options.selectableMonths[0];
-
+            
             self.persianDate = _persianDate;
+            if (self.options.selectedDate != undefined)
+                self.persianDate = self.persianDate.parse(self.options.selectedDate);
             self._id = 'pdp-' + Math.round(Math.random() * 1e7);
             self.persianDate.formatDate = options.formatDate;
             self.calendar = $('<div id="' + self._id + '" class="pdp-' + options.theme + '" />')
@@ -136,19 +135,22 @@
         }
         ;
         // persianDatepicker methods
-        persianDatepicker.prototype = {
-            show: function() {
-                $.each($('.pdp-el').not(this.el), function(i, o) {
-                    if (o.length) {
-                        o.options.onHide(o.calendar);
-                    }
-                });
+        persianDatepicker.prototype = {            
+            show: function () {
+                this.calendar.show();
+                //$.each($('.pdp-el').not(this.el), function(i, o) {
+                //    if (o.length) {
+                //        o.options.onHide(o.calendar);
+                //    }
+                //});
                 this.options.onShow(this.calendar);
             },
-            hide: function() {
-                if (this.options && !this.options.alwaysShow) {
-                    this.options.onHide(this.calendar);
-                }
+            hide: function () {
+                this.calendar.hide();
+                //if (this.options && !this.options.alwaysShow) {
+                //    this.options.onHide(this.calendar);
+                //}
+                this.options.onHide(this.calendar);
             },
             render: function() {
                 this.calendar.children().remove();
@@ -317,7 +319,10 @@
                             _today = '', _selday = '';
                             if (self.now().compare(_dt) == 0)
                                 _today = 'today';
-                            if (cellIndex - _start + 1 == self.now().date)
+                            if (self.options.selectedDate != undefined) {
+                                if (self.persianDate.parse(self.options.selectedDate).date == cellIndex - _start + 1)
+                                _selday = 'selday';
+                            } else if (cellIndex - _start + 1 == self.now().date)
                                 _selday = 'selday';
                             _fri = col == 6 ? 'friday' : '';
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + '" ' + self.cellStyle + ' />');
@@ -373,7 +378,7 @@
                     el.html(self.persianDate.parse(v).toString(self.options.formatDate));
                 }
                 el.data('date', { jDate: v, gDate: this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW") });
-                this.options.OnSelect();
+                this.options.onSelect();
             },
             getDate: function(jd, d) {
                 jd.date = d;
@@ -460,8 +465,7 @@ var persianDate = (function () {
             m = arr[1];
             d = arr[2];
             wd = arr[3];
-            var r = new persianDate();
-            var _gDate = new Date();
+            var r = new persianDate();            
             r.year = parseInt(y), r.month = parseInt(m), r.date = parseInt(d)
                     , r.day = wd, r.gDate = new Date;
             return r;
