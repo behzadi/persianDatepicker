@@ -12,19 +12,19 @@
  * Date: Tue Jan 1 2013
  */
 ;
-(function() {
-    $.fn.persianDatepicker = function(options) {
+(function () {
+    $.fn.persianDatepicker = function (options) {
         var pluginName = 'persianDatepicker';
         var instance = this.data(pluginName);
         if (!instance) {
-            return this.each(function() {
+            return this.each(function () {
                 return $(this).data(pluginName, new persianDatepicker(this, options));
             });
         }
         return (options === true) ? instance : this;
     };
     // persianDatepicker object
-    var persianDatepicker = (function() {
+    var persianDatepicker = (function () {
         function persianDatepicker(element, userOptions) {
             var defaults = {
                 months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
@@ -49,13 +49,13 @@
                     x: 0,
                     y: 0,
                 },
-                onShow: function () {},
-                onHide: function () {},
-                onSelect: function () {}
+                onShow: function () { },
+                onHide: function () { },
+                onSelect: function () { }
             };
             var self = this;
             self.el = $(element);
-            var el = self.el;     
+            var el = self.el;
             self.options = $.extend(false, {}, defaults, userOptions);
             var options = self.options;
 
@@ -70,15 +70,13 @@
             self.footerStyle = "style='height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + _fontSize + "px;' ";
 
             self.jDateFunctions = new jDateFunctions();
-            _persianDate = self.now();
-            if (options.selectableYears != undefined && options.selectableYears._indexOf(_persianDate.year) == -1)
-                _persianDate.year = options.selectableYears[0];
-            if (self.options.selectableMonths._indexOf(_persianDate.month) == -1)
-                _persianDate.month = options.selectableMonths[0];
-            
-            self.persianDate = _persianDate;
-            if (self.options.selectedDate != undefined)
-                self.persianDate = self.persianDate.parse(self.options.selectedDate);
+            self._persianDate = (self.options.selectedDate != undefined) ? new persianDate().parse(self.options.selectedDate) : self.now();
+            if (options.selectableYears != undefined && options.selectableYears._indexOf(self._persianDate.year) == -1)
+                self._persianDate.year = options.selectableYears[0];
+            if (self.options.selectableMonths._indexOf(self._persianDate.month) == -1)
+                self._persianDate.month = options.selectableMonths[0];
+
+            self.persianDate = self._persianDate;
             self._id = 'pdp-' + Math.round(Math.random() * 1e7);
             self.persianDate.formatDate = options.formatDate;
             self.calendar = $('<div id="' + self._id + '" class="pdp-' + options.theme + '" />')
@@ -89,22 +87,33 @@
 
             el
                     .addClass('pdp-el')
-                    .bind('click', function(e) {
+                    .bind('click', function (e) {
                         self.show(e);
                     })
-                    .bind('focus', function(e) {
+                    .bind('focus', function (e) {
                         self.show(e);
                     });
-            if (options.selectedBefore && !options.showGregorianDate)
-                self.showDate(el, self.now().toString(options.formatDate));
-            if (options.selectedBefore && options.showGregorianDate)
-                self.showDate(el, self.now().gDate._toString(self.options.formatDate));
+
+            if (options.selectedBefore && !options.showGregorianDate) {
+                if (self.options.selectedDate != undefined)
+                    self.showDate(el, self.persianDate.parse(self.options.selectedDate).toString(options.formatDate));
+                else
+                    self.showDate(el, self.now().toString(options.formatDate));
+            }
+
+            if (options.selectedBefore && options.showGregorianDate) {
+                if (self.options.selectedDate != undefined)
+                    self.showDate(el, self.persianDate.parse(self.options.selectedDate).gDate._toString(self.options.formatDate));
+                else
+                    self.showDate(el, self.now().gDate._toString(self.options.formatDate));
+            }
+
             if (options.isRTL)
                 el.addClass('rtl');
             if (self.calendar.length && !options.alwaysShow) {
                 self.calendar.hide();
             }
-            $(document).bind('mouseup', function(e) {
+            $(document).bind('mouseup', function (e) {
                 var target = e.target;
                 var calendar = self.calendar;
                 if (!el.is(target) && !calendar.is(target) && calendar.has(target).length === 0 && calendar.is(':visible')) {
@@ -119,7 +128,7 @@
                     container.hide();
                 }
             });
-            var onResize = function() {
+            var onResize = function () {
                 var elPos = el.offset();
                 self.calendar.css(
                         {
@@ -135,7 +144,7 @@
         }
         ;
         // persianDatepicker methods
-        persianDatepicker.prototype = {            
+        persianDatepicker.prototype = {
             show: function () {
                 this.calendar.show();
                 //$.each($('.pdp-el').not(this.el), function(i, o) {
@@ -152,14 +161,14 @@
                 //}
                 this.options.onHide(this.calendar);
             },
-            render: function() {
+            render: function () {
                 this.calendar.children().remove();
                 this.header();
                 this.dows();
                 this.content();
                 this.footer();
             },
-            header: function() {
+            header: function () {
                 var self = this;
                 _monthYear = $('<div class="" />');
                 _monthYear.appendTo(this.calendar);
@@ -168,9 +177,9 @@
                 _next = $('<div class="nextArrow" />')
                         .html(this.options.nextArrow)
                         .attr('title', 'ماه بعد')
-                        .bind("click", function() {
+                        .bind("click", function () {
                             nextMonth = self.persianDate.month + 1;
-                            for (; self.options.selectableMonths._indexOf(nextMonth) == - 1 && nextMonth < 13; nextMonth++);
+                            for (; self.options.selectableMonths._indexOf(nextMonth) == -1 && nextMonth < 13; nextMonth++);
                             self.persianDate.addMonth(nextMonth - self.persianDate.month);
                             self.render();
                         });
@@ -180,26 +189,26 @@
                 // Build month label
                 var _monthText = $('<span/>')
                         .html(self.options.months[self.persianDate.month - 1])
-                        .mousedown(function() {
+                        .mousedown(function () {
                             return false;
                         })
-                        .click(function(e) {
+                        .click(function (e) {
                             e.stopPropagation();
-                            _yearSelect.css({display: 'none'});
-                            _monthSelect.css({display: 'inline-block'});
+                            _yearSelect.css({ display: 'none' });
+                            _monthSelect.css({ display: 'inline-block' });
                         });
                 var _yearText = $('<span/>')
                         .html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(self.persianDate.year) : self.persianDate.year)
-                        .mousedown(function() {
+                        .mousedown(function () {
                             return false;
                         })
-                        .click(function(e) {
+                        .click(function (e) {
                             e.stopPropagation();
-                            _monthSelect.css({display: 'none'});
-                            _yearSelect.css({display: 'inline-block'});
+                            _monthSelect.css({ display: 'none' });
+                            _yearSelect.css({ display: 'inline-block' });
                             _yearSelect.scrollTop(70);
                         });
-                var getSelectableYears = function(f, l) {
+                var getSelectableYears = function (f, l) {
                     //_yearSelect.children().remove();
                     var pre = !1;
                     if (f === undefined && l === undefined) {
@@ -216,13 +225,13 @@
                     var arr = [];
                     for (i = b; i < a && b > 0; i++)
                         arr.push(parseInt(i));
-                    $.each(self.options.selectableYears || ((pre) ? arr.reverse() : arr), function(i, v) {
+                    $.each(self.options.selectableYears || ((pre) ? arr.reverse() : arr), function (i, v) {
                         var o = $('<li ' + self.selectYearLiStyle + ' />').html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(v) : v);
                         if (v == self.persianDate.year) {
                             o.addClass('selected');
                         }
                         o.attr("value", v);
-                        o.bind("click", function() {
+                        o.bind("click", function () {
                             self.persianDate.date = 1;
                             self.persianDate.year = parseInt(v);
                             self.render();
@@ -231,18 +240,18 @@
                     });
                 };
                 getSelectableYears();
-                
+
                 // selectable months                
                 for (i = 1; i <= 12; i++) {
-                    var m = self.options.months[i - 1];                    
-                        var o = (self.options.selectableMonths._indexOf(i) == -1) ? $('<li class="disableMonth" ' + self.selectMonthLiStyle + ' />').html(m) : $('<li ' + self.selectMonthLiStyle + ' />').html(m);                               
+                    var m = self.options.months[i - 1];
+                    var o = (self.options.selectableMonths._indexOf(i) == -1) ? $('<li class="disableMonth" ' + self.selectMonthLiStyle + ' />').html(m) : $('<li ' + self.selectMonthLiStyle + ' />').html(m);
                     if (i + 1 == self.persianDate.month) {
                         o.addClass('selected');
                     }
-                    o.data('month', {month: m, monthNum: i});
+                    o.data('month', { month: m, monthNum: i });
                     if (!o.hasClass('disableMonth')) {
-                        o.bind("click", function() {
-                            self.persianDate.date = 1;							
+                        o.bind("click", function () {
+                            self.persianDate.date = 1;
                             self.persianDate.month = $(this).data('month').monthNum;
                             self.render();
                         });
@@ -251,7 +260,7 @@
                 }
 
                 // selectable years
-                _yearSelect.bind("scroll", function() {
+                _yearSelect.bind("scroll", function () {
                     if (self.options.selectableYears == undefined) {
                         c = $(this).find("li").length;
                         firstYear = parseInt($(this).children("li:first").val());
@@ -281,9 +290,9 @@
                 _prev = $('<div class="prevArrow" />')
                         .html(this.options.prevArrow)
                         .attr('title', 'ماه قبل')
-                        .bind("click", function() {
+                        .bind("click", function () {
                             prevMonth = self.persianDate.month - 1;
-                            for (; self.options.selectableMonths._indexOf(prevMonth) == - 1 && prevMonth > 0; prevMonth--)
+                            for (; self.options.selectableMonths._indexOf(prevMonth) == -1 && prevMonth > 0; prevMonth--)
                                 ;
                             self.persianDate.addMonth(-(self.persianDate.month - prevMonth));
                             self.render();
@@ -291,7 +300,7 @@
                 _prev.appendTo(_head);
             },
             // days of week title
-            dows: function() {
+            dows: function () {
                 _row = $('<div class="dows" />');
                 for (i = 0; i < 7; i++) {
                     _cell = $('<div class="dow cell " ' + this.cellStyle + ' />')
@@ -300,7 +309,7 @@
                 }
                 _row.appendTo(this.calendar);
             },
-            content: function() {
+            content: function () {
                 var self = this;
                 _days = $('<div class="days" />');
                 _days.appendTo(this.calendar);
@@ -319,17 +328,18 @@
                             _today = '', _selday = '';
                             if (self.now().compare(_dt) == 0)
                                 _today = 'today';
+
                             if (self.options.selectedDate != undefined) {
                                 if (self.persianDate.parse(self.options.selectedDate).date == cellIndex - _start + 1)
-                                _selday = 'selday';
+                                    _selday = 'selday';
                             } else if (cellIndex - _start + 1 == self.now().date)
                                 _selday = 'selday';
                             _fri = col == 6 ? 'friday' : '';
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + '" ' + self.cellStyle + ' />');
-                            _cell.data("date", {jDate: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt)._toString(self.options.formatDate)});
+                            _cell.data("date", { jDate: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt)._toString(self.options.formatDate) });
                             _cell
                                     .html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(cellIndex - _start + 1) : cellIndex - _start + 1)
-                                    .bind("click", function() {
+                                    .bind("click", function () {
                                         self.calendar.find(".day").removeClass("selday");
                                         $(this).addClass("selday");
                                         if (self.options.showGregorianDate)
@@ -345,18 +355,18 @@
                 }
 
             },
-            footer: function() {
+            footer: function () {
                 var self = this;
                 _footer = $('<div class="footer" ' + self.footerStyle + ' />');
                 _footer.appendTo(this.calendar);
 
                 if (self.options.selectableMonths._indexOf(self.persianDate.month) > -1) {
                     _goToday = $('<a class="goToday" />');
-                    _goToday.data("date", {jDate: self.now().toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(self.now())._toString(self.options.formatDate)});
+                    _goToday.data("date", { jDate: self.now().toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(self.now())._toString(self.options.formatDate) });
                     _goToday
                             .attr("href", "javascript:;")
                             .html('هم اکنون')
-                            .bind("click", function() {
+                            .bind("click", function () {
                                 self.persianDate = self.now();
                                 if (self.options.showGregorianDate)
                                     self.showDate(self.el, $(this).data('date').gDate);
@@ -380,22 +390,22 @@
                 el.data('date', { jDate: v, gDate: this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW") });
                 this.options.onSelect();
             },
-            getDate: function(jd, d) {
+            getDate: function (jd, d) {
                 jd.date = d;
                 jd.day = this.jDateFunctions.getWeekday(this.jDateFunctions.getJulianDayFromPersian(jd))
                 return jd;
             },
-            now: function() {
+            now: function () {
                 return this.jDateFunctions.getPCalendarDate(this.jDateFunctions.getJulianDay(new Date()));
             },
         };
         // Return the persianDatepicker plugin
         return persianDatepicker;
     })();
-        
-    (function() {
+
+    (function () {
         // format Date with _toString()
-        Date.prototype._toString = function(formatDate) {
+        Date.prototype._toString = function (formatDate) {
             months = ["Januray", "February", "March", "April", "May", "June", "Julay", "August", "September", "October", "November", "December"];
             dows = ["Sun", "Mon", "Tue", "Wed", "Tur", "Fri", "Sat"];
             if (formatDate === undefined || formatDate == "default")
@@ -416,16 +426,11 @@
                     )
         };
         //    _indexOf() for arrays
-        Array.prototype._indexOf = function(value) {
+        Array.prototype._indexOf = function (value) {
             return $.inArray(value, this);
         };
     })();
 })();// end of persianDatepicker plugin
-
-$.fn.persianDatepicker.greet = function (name) {
-    console.log('Hello, ' + name + ', welcome to Script Junkies!');
-};
-
 
 // persianDate object
 var persianDate = (function () {
@@ -465,9 +470,10 @@ var persianDate = (function () {
             m = arr[1];
             d = arr[2];
             wd = arr[3];
-            var r = new persianDate();            
+            var r = new persianDate();
+            jdf = new jDateFunctions();
             r.year = parseInt(y), r.month = parseInt(m), r.date = parseInt(d)
-                    , r.day = wd, r.gDate = new Date;
+                    , r.day = wd, r.gDate = jdf.getGCalendarDate(jdf.getJulianDayFromPersian(r), "jgmonth");
             return r;
         },
         toString: function (formatDate) {
