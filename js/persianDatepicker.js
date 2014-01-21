@@ -70,6 +70,16 @@
             self.footerStyle = "style='height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + _fontSize + "px;' ";
 
             self.jDateFunctions = new jDateFunctions();
+
+            if (self.options.selectedDate == undefined) {
+                if (el.is('input')) {
+                    if (el.val() != "")
+                        self.options.selectedDate = el.val();
+                } else {
+                    if (el.html() != "")
+                        self.options.selectedDate = el.html();
+                }               
+            }
             self._persianDate = (self.options.selectedDate != undefined) ? new persianDate().parse(self.options.selectedDate) : self.now();
             if (options.selectableYears != undefined && options.selectableYears._indexOf(self._persianDate.year) == -1)
                 self._persianDate.year = options.selectableYears[0];
