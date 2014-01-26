@@ -72,11 +72,12 @@
             self.jDateFunctions = new jDateFunctions();
 
             if (self.options.selectedDate == undefined) {
+                var patt1 = new RegExp('^([1-9][0-9][0-9][0-9])/([0]?[1-9]|[1][0-2])/([0]?[1-9]|[1-2][0-9]|[3][0-1])$');
                 if (el.is('input')) {
-                    if (el.val() != "")
+                    if (el.val() != "" && patt1.test(el.val()))
                         self.options.selectedDate = el.val();
                 } else {
-                    if (el.html() != "")
+                    if (el.html() != "" && patt1.test(el.html()))
                         self.options.selectedDate = el.html();
                 }               
             }
@@ -565,11 +566,7 @@ var jDateFunctions = (function () {
                 pd.date = 1;
                 day = (jdmp - this.getJulianDayFromPersian(pd)) + 1;
             }
-            else {
-                try {
-                    console.log("Invalid date 570");
-                }catch (e){}
-            }
+            
             var r = new persianDate;
             r.year = y,
                     r.month = m,
@@ -613,11 +610,7 @@ var jDateFunctions = (function () {
                     y = c - 4715;
                 }
             }
-            else {
-                try {
-                    console.log("Invalid date 618");
-                } catch (e) { }
-            }
+           
             r = new Date();
             return new Date(y, m - 1, day, r.getHours(), r.getMinutes(), r.getSeconds(), r.getMilliseconds());
         },
@@ -642,9 +635,9 @@ var jDateFunctions = (function () {
             }
             var b = 0;
             if (d0 < 1 || ((m0 == 1 || m0 == 3 || m0 == 5 || m0 == 7 || m0 == 8 || m0 == 10 || m0 == 12) && d0 > 31) || ((m0 == 4 || m0 == 6 || m0 == 9 || m0 == 11) && d0 > 30)) {
-                try {
-                    console.log("Invalid date 646");
-                } catch (e) { }
+                //try {
+                //    console.log("Id 646");
+                //} catch (e) { }
             }
             if (jgGOrJ == 2 || (jgGOrJ == 0 && (y0 < 1582 || (y0 == 1582 && m0 < 10) || (y0 == 1582 && m0 == 10 && d0 <= 4)))) {
                 /* Julian calendar */
@@ -652,9 +645,9 @@ var jDateFunctions = (function () {
                 if (y0 / 4.0 == Math.round(y0 / 4.0)) {
                     /* Leap year */
                     if (m0 == 2 && d0 > 29) {
-                        try {
-                            console.log("Invalid date 656");
-                        } catch (e) { }
+                        //try {
+                        //    console.log("Id 656");
+                        //} catch (e) { }
                     }
                 }
             }
@@ -667,27 +660,27 @@ var jDateFunctions = (function () {
                         if (y0 / 400.0 == Math.round(y0 / 400.0)) {
                             /* Leap year */
                             if (m0 == 2 && d0 > 29) {
-                                try {
-                                    console.log("Invalid date 671");
-                                } catch (e) { }
+                                //try {
+                                //    console.log("Id 671");
+                                //} catch (e) { }
                             }
                         }
                     }
                     else {
                         /* Leap year */
                         if (m0 == 2 && d0 > 29) {
-                            try {
-                                console.log("Invalid date 680");
-                            } catch (e) { }
+                            //try {
+                            //    console.log("Id 680");
+                            //} catch (e) { }
                         }
                     }
                 }
             }
-            else {
-                try {
-                    console.log("Invalid date 687");
-                } catch (e) { }
-            }
+            //else {
+            //    try {
+            //        console.log("Id 687");
+            //    } catch (e) { }
+            //}
             var jd = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + b - 1524.5;
             return jd;
         },
@@ -711,9 +704,9 @@ var jDateFunctions = (function () {
                 return 30;
             }
             else if (m != 12) {
-                try {
-                    console.log("Invalid date 715");
-                }catch (e){}
+                //try {
+                //    console.log("Id 715");
+                //}catch (e){}
             }
             /* Esfand */
             if (((((((y - ((y > 0) ? 474 : 473)) % 2820) + 474) + 38) * 682) % 2816) < 682) {
