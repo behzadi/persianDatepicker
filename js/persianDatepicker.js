@@ -74,10 +74,10 @@
             if (self.options.selectedDate == undefined) {
                 var patt1 = new RegExp('^([1-9][0-9][0-9][0-9])/([0]?[1-9]|[1][0-2])/([0]?[1-9]|[1-2][0-9]|[3][0-1])$');
                 if (el.is('input')) {
-                    if (el.val() != "" && patt1.test(el.val()))
-                        self.options.selectedDate = el.val();
+                    if (patt1.test(el.val()))
+                        self.options.selectedDate = el.val();                    
                 } else {
-                    if (el.html() != "" && patt1.test(el.html()))
+                    if (patt1.test(el.html()))
                         self.options.selectedDate = el.html();
                 }               
             }
@@ -147,11 +147,11 @@
                             left: (elPos.left + options.calendarPosition.x) + 'px'
                         });
             };
-            $(window).resize(onResize);
-            onResize();
+            self.onresize = onResize;
+            $(window).resize(onResize);            
             $('body').append(self.calendar);
-
             self.render();
+            onResize();
         }
         ;
         // persianDatepicker methods
@@ -164,6 +164,7 @@
                 //    }
                 //});
                 this.options.onShow(this.calendar);
+                this.onresize();
             },
             hide: function () {
                 this.calendar.hide();
