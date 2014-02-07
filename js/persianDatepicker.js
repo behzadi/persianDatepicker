@@ -257,7 +257,7 @@
                 for (i = 1; i <= 12; i++) {
                     var m = self.options.months[i - 1];
                     var o = (self.options.selectableMonths._indexOf(i) == -1) ? $('<li class="disableMonth" ' + self.selectMonthLiStyle + ' />').html(m) : $('<li ' + self.selectMonthLiStyle + ' />').html(m);
-                    if (i + 1 == self.persianDate.month) {
+                    if (i == self.persianDate.month) {
                         o.addClass('selected');
                     }
                     o.data('month', { month: m, monthNum: i });
