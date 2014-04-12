@@ -6,11 +6,11 @@ persianDatepicker is A lightweight jQuery plugin that select persian(jalali) dat
   
 - **Browsers:** >IE8, Chrome, Firefox, safari, opera  
 - **Light weight:** ~14k minified
-- **Beautiful themes:** soon
+- **Beautiful themes:** default, dark
 - **Size and font:** set the size (width & height) and fontsize for datepicker cells
 - **Show persian numbers:** (۰ - ۹)
 - **Select gregorian date:** (good way to convert jalali date to gregorian date)
-- **Multi formatting date:** like ("YYYY/NM/DD hh:ss") becomes like **1392/7/22 16:45**
+- **Multi formatting date:** like ("YYYY/0M/DD hh:ss") becomes like **1392/07/22 16:45**
 - **Selectable months and years:**  [1, 3, 4, 12]
 
 
@@ -70,6 +70,6 @@ $("#input1")persianDatePicker({
 ```
 
 ##Credit
-Created by [metlex](http://twitter.com/metlex "metlex"), [blog](http://mbehzadi.com/ "mbehzadi.com")
+Created by [metlex](http://twitter.com/kharabati "@kharabati"), [blog](http://mbehzadi.com/ "mbehzadi.com")
 
 use, share , fork , enjoy! , ...
