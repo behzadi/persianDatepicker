@@ -70,6 +70,6 @@ $("#input1")persianDatePicker({
 ```
 
 ##Credit
-Created by [metlex](http://twitter.com/kharabati "@kharabati"), [blog](http://mbehzadi.com/ "mbehzadi.com")
+Created by [@kharabati](http://twitter.com/kharabati "@kharabati"), [blog](http://mbehzadi.com/ "mbehzadi.com")
 
 use, share , fork , enjoy! , ...
