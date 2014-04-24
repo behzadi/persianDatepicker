@@ -31,6 +31,7 @@
                 dowTitle: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
                 shortDowTitle: ["ش", "ی", "د", "س", "چ", "پ", "ج"],
                 showGregorianDate: !1,
+                hasGregorianDate: !1,
                 persianNumbers: !0,
                 formatDate: "YYYY/MM/DD",
                 selectedBefore: !1,
@@ -75,11 +76,19 @@
                 var patt1 = new RegExp('^([1-9][0-9][0-9][0-9])/([0]?[1-9]|[1][0-2])/([0]?[1-9]|[1-2][0-9]|[3][0-1])$');
                 if (el.is('input')) {
                     if (patt1.test(el.val()))
-                        self.options.selectedDate = el.val();                    
+                        self.options.selectedDate = el.val();
                 } else {
                     if (patt1.test(el.html()))
                         self.options.selectedDate = el.html();
                 }               
+            }
+            if(self.options.hasGregorianDate){
+                self.options.selectedDate = self.jDateFunctions.getPCalendarDate(this.jDateFunctions.getJulianDay(new Date(self.options.selectedDate))).toString(options.formatDate)
+                if (el.is('input')) {
+                    el.val(self.options.selectedDate);
+                } else {
+                    el.html(self.options.selectedDate);
+                }
             }
             self._persianDate = (self.options.selectedDate != undefined) ? new persianDate().parse(self.options.selectedDate) : self.now();
             if (options.selectableYears != undefined && options.selectableYears._indexOf(self._persianDate.year) == -1)
@@ -400,6 +409,7 @@
                     el.html(self.persianDate.parse(v).toString(self.options.formatDate));
                 }
                 el.data('date', { jDate: v, gDate: this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW") });
+                el.data('gregorian',self.persianDate.parse(v).gDate._toString(self.options.formatDate));
                 this.options.onSelect();
             },
             getDate: function (jd, d) {
@@ -409,7 +419,7 @@
             },
             now: function () {
                 return this.jDateFunctions.getPCalendarDate(this.jDateFunctions.getJulianDay(new Date()));
-            },
+            }
         };
         // Return the persianDatepicker plugin
         return persianDatepicker;
