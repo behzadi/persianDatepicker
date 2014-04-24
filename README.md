@@ -30,7 +30,7 @@ persianDatepicker is A lightweight jQuery plugin that select persian(jalali) dat
 ```html
 <script type="text/javascript">
     $(function() {
-        $("#input1, #span1").persianDatePicker();       
+        $("#input1, #span1").persianDatepicker();       
     });
 </script>
 ```
