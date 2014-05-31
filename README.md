@@ -66,6 +66,9 @@ $("#input1")persianDatePicker({
     onHide: function(calendar) {
         calendar.hide();
     },
+    onSelect: function() {
+      // do on select, can be used instead of jquery .change
+    },
 });
 ```
 
