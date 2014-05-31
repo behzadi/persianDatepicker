@@ -399,7 +399,7 @@
                 } else {
                     el.html(self.persianDate.parse(v).toString(self.options.formatDate));
                 }
-                el.data('date', { jDate: v, gDate: this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW") });
+                el.data('date', { jDate: self.persianDate.parse(v).toString(self.options.formatDate), gDate:self.persianDate.parse(v).gDate._toString(self.options.formatDate)});
                 this.options.onSelect();
             },
             getDate: function (jd, d) {
