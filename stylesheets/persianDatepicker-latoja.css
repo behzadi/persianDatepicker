@@ -1,0 +1,209 @@
+
+@keyframes start {
+    from {
+        transform: scale(.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes start {
+    from {
+        -webkit-transform: scale(.5);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+.rtl{direction:rtl}
+.pdp-latoja {
+    position: absolute;    
+    direction: rtl;    
+    color: #515d65;
+    background: #eee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.49);
+}
+
+.pdp-latoja ::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.pdp-latoja ::-webkit-scrollbar
+{
+	width: 15px;
+	background-color: #F5F5F5;
+}
+
+.pdp-latoja ::-webkit-scrollbar-thumb
+{
+	background-color: #444444;
+}
+.pdp-latoja ::selection{
+    color: #67cdcc;
+}
+
+.pdp-latoja .header{
+    background-color: #333333;    
+    border: 1px solid #555555;   
+    padding: 2px;
+    font-weight: bold;    
+    text-shadow: 0 1px 1px rgba(255,255,255,.8);
+    background-color: #e0e8ec;
+-moz-box-shadow: 0 1px 0 rgba(255,255,255,.53), inset 0 -1px 0 rgba(0,0,0,.12);
+-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.53), inset 0 -1px 0 rgba(0,0,0,.12);
+box-shadow: 0 1px 0 rgba(255,255,255,.53), inset 0 -1px 0 rgba(0,0,0,.12);
+background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…IwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
+background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.21) 0%, rgba(255,255,255,.21) 100%);
+background-image: -o-linear-gradient(bottom, rgba(0,0,0,.21) 0%, rgba(255,255,255,.21) 100%);
+background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.21) 0%, rgba(255,255,255,.21) 100%);
+background-image: linear-gradient(bottom, rgba(0,0,0,.21) 0%, rgba(255,255,255,.21) 100%);
+}
+
+.pdp-latoja .yearSelect{
+    overflow-y: auto;
+    direction: ltr;
+}
+
+.pdp-latoja .monthSelect li.disableMonth, .pdp-latoja .monthSelect li.disableMonth:hover{
+    color: #999;
+    background: #bbbbbb;    
+}
+
+.pdp-latoja .yearSelect, .pdp-latoja .monthSelect{   
+    font:normal 12px Tahoma;
+    background: #eeeeee;
+    border: 1px solid #bbbbbb;    
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    width: 99.6%;    
+    text-align: right;    
+    z-index: 9999;    
+    animation: start 0.2s;
+    -webkit-animation: start 0.2s;
+}
+
+.pdp-latoja .yearSelect li, .pdp-latoja .monthSelect li {
+    padding: 1px;
+    cursor: default;
+    display: inline-table;    
+    text-align: center;       
+    border: 1px dotted #bbbbbb;
+}
+.pdp-latoja .yearSelect li:hover, .pdp-latoja .monthSelect li:hover {
+    background: #333333;
+    color: #ffffff;
+    border-color: #333333;
+}
+.pdp-latoja  .selected{
+    background: #15a6eb;
+    color: #ffffff;
+}
+
+.pdp-latoja .nextArrow{
+    right:0;
+}
+.pdp-latoja .prevArrow{
+    left:0;    
+}
+.pdp-latoja .monthYear{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pdp-latoja .nextArrow, .pdp-latoja .prevArrow{
+    cursor: pointer;    
+    position: absolute;
+    top:1px;
+    padding: 2px;
+}
+
+.pdp-latoja .nextArrow:hover, .pdp-latoja .prevArrow:hover{
+    color: #eeeeee;
+}
+
+.pdp-latoja .cell {  
+    display: inline-block;    
+    cursor: default;
+    text-align: center; 
+}
+
+/* Days of the week */
+.pdp-latoja .dows {  
+    background: #eeeeee;      
+    margin-bottom: 5px;
+}
+.pdp-latoja .dow {            
+    font: bold 14px 'helvetica';
+    border: 1px solid #eeeeee;
+}
+
+.pdp-latoja .days{
+    background-color: #fefefe;       
+    font: normal 12px Tahoma;   
+}
+
+.pdp-latoja .day{
+   border: 1px solid #dddddd;  
+padding: 0;
+-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+
+background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…IwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
+background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%);
+background-image: -o-linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%);
+background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%);
+background-image: linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%);
+}
+
+.pdp-latoja .day:hover{    
+   background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.12) 0%, rgba(255,255,255,.06) 100%);
+background-image: -o-linear-gradient(bottom, rgba(0,0,0,.12) 0%, rgba(255,255,255,.06) 100%);
+background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.12) 0%, rgba(255,255,255,.06) 100%);
+background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.12) 0%, rgba(255,255,255,.06) 100%); 
+}
+.pdp-latoja .selday, .pdp-latoja .selday:hover{
+   color: #fff;
+background-color: #8ab8ed;
+text-shadow: 0 1px 0 rgba(0,0,0,.26);
+-moz-box-shadow: inset 0 4px 9px rgba(0,0,0,.24);
+-webkit-box-shadow: inset 0 4px 9px rgba(0,0,0,.24);
+box-shadow: inset 0 4px 9px rgba(0,0,0,.24);
+}
+
+.pdp-latoja .friday{
+    color: #c71585;   
+}
+
+.pdp-latoja .today{
+    color: #fff;
+    background: #8ab8ed;
+}
+.pdp-latoja .today:hover{
+    color: #fff;    
+}
+
+.pdp-latoja .nul{    
+    border: 1px solid #eeeeee;  
+    background: #eeeeee;  
+}
+
+.pdp-latoja .footer{    
+    background: #777777;
+    font: normal 12px Tahoma;   
+    text-align: center;
+    height: 17px;
+}
+.pdp-latoja .footer .goToday{
+    color: #dddddd;
+    text-decoration: none;    
+}
+.pdp-latoja .footer .goToday:hover{      
+    text-decoration: overline;    
+}

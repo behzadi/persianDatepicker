@@ -1,0 +1,193 @@
+
+@keyframes start {
+    from {
+        transform: scale(.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes start {
+    from {
+        -webkit-transform: scale(.5);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+.rtl{direction:rtl}
+.pdp-melon {
+    position: absolute;    
+    direction: rtl;    
+    color: #eeeeee;
+    background: #333333;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.49);
+}
+
+.pdp-melon ::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.pdp-melon ::-webkit-scrollbar
+{
+	width: 15px;
+	background-color: #F5F5F5;
+}
+
+.pdp-melon ::-webkit-scrollbar-thumb
+{
+	background-color: #444444;
+}
+.pdp-melon ::selection{
+    color: #67cdcc;
+}
+
+.pdp-melon .header{
+    background-color: #333333;    
+    border: 1px solid #555555;   
+    padding: 2px;
+    font-weight: bold;
+    color: #eeeeee;
+}
+
+.pdp-melon .yearSelect{
+    overflow-y: auto;
+    direction: ltr;
+}
+
+.pdp-melon .monthSelect li.disableMonth, .pdp-melon .monthSelect li.disableMonth:hover{
+    color: #bbb;
+    background: #eee;    
+}
+
+.pdp-melon .yearSelect, .pdp-melon .monthSelect{   
+    font:normal 12px Tahoma;
+    background: #777777;
+    border: 1px solid #bbbbbb;    
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    width: 99.6%;    
+    text-align: right;    
+    z-index: 9999;    
+    animation: start 0.2s;
+    -webkit-animation: start 0.2s;
+}
+
+.pdp-melon .yearSelect li, .pdp-melon .monthSelect li {
+    padding: 1px;
+    cursor: default;
+    display: inline-table;    
+    text-align: center;       
+    border: 1px dotted #bbbbbb;
+}
+.pdp-melon .yearSelect li:hover, .pdp-melon .monthSelect li:hover {
+    background: #333333;
+    color: #ffffff;
+    border-color: #333333;
+}
+.pdp-melon  .selected{
+    background: #15a6eb;
+    color: #ffffff;
+}
+
+.pdp-melon .nextArrow{
+    right:0;
+}
+.pdp-melon .prevArrow{
+    left:0;    
+}
+.pdp-melon .monthYear{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pdp-melon .nextArrow, .pdp-melon .prevArrow{
+    cursor: pointer;    
+    position: absolute;
+    top:1px;
+    padding: 2px;
+}
+
+.pdp-melon .nextArrow:hover, .pdp-melon .prevArrow:hover{
+    color: #eeeeee;
+}
+
+.pdp-melon .cell {  
+    display: inline-block;    
+    cursor: default;
+    text-align: center; 
+}
+
+/* Days of the week */
+.pdp-melon .dows {  
+    background: #333333;
+    color: #cccccc;    
+    margin-bottom: 5px;
+}
+.pdp-melon .dow {            
+    font: bold 14px 'helvetica';
+    border: 1px solid #333333;
+}
+
+.pdp-melon .days{
+    background-color: #f97e76;       
+    font: normal 12px Tahoma;   
+}
+
+.pdp-melon .day{
+    border: 1px solid #f97e76;    
+}
+
+.pdp-melon .day:hover{    
+    background: #2e3641; 
+    border-color: #2e3641;  
+}
+.pdp-melon .selday, .pdp-melon .selday:hover{
+    background: #2e3641;
+    border-color: #2e3641;	
+}
+
+.pdp-melon .friday{
+    color: #efd6ef;   
+}
+
+.pdp-melon .today{
+    color: #fff;
+    background: #74a3d3;
+}
+
+.pdp-melon .disday,
+.pdp-melon .disday:hover {
+    color: #666666;
+    background: #bbbbbb;
+}
+
+.pdp-melon .today:hover{
+    color: #fff;
+    background: #74a3d3;    
+}
+
+.pdp-melon .nul{    
+    border: 1px solid #f97e76;  
+    background: #f97e76;  
+}
+
+.pdp-melon .footer{    
+    background: #2e3641;
+    font: normal 12px Tahoma;   
+    text-align: center;
+    height: 17px;
+}
+.pdp-melon .footer .goToday{
+    color: #dddddd;
+    text-decoration: none;    
+}
+.pdp-melon .footer .goToday:hover{      
+    text-decoration: overline;    
+}

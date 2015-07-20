@@ -7,10 +7,31 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="stylesheets/persianDatepicker-default.css">
+	<link rel="stylesheet" href="stylesheets/persianDatepicker-dark.css">
+	<link rel="stylesheet" href="stylesheets/persianDatepicker-latoja.css">
+	<link rel="stylesheet" href="stylesheets/persianDatepicker-melon.css">
+	<link rel="stylesheet" href="stylesheets/persianDatepicker-lightorang.css">
+	
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+	
+	
+	<script type="text/javascript" src="javascripts/jquery-1.10.1.min.js" ></script>
+	<script type="text/javascript" src="javascripts/persianDatepicker.min.js" ></script>
+	<script>
+	$(function(){
+		$("#pdpDefault").persianDatepicker({ alwaysShow:true});
+		$("#pdpLatoja").persianDatepicker({ theme:"latoja", alwaysShow:true});
+		$("#pdpLightorang").persianDatepicker({ theme:"lightorang", alwaysShow:true});
+		$("#pdpMelon").persianDatepicker({ theme:"melon", alwaysShow:true});
+		$("#pdpDark").persianDatepicker({ theme:"dark", alwaysShow:true});
+		
+	});
+	</script>
+	
   </head>
   <body>
     <div class="wrapper">
@@ -27,6 +48,15 @@
           <li><a href="https://github.com/behzadi/persianDatepicker">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
+	  
+	  <section>
+		<input type="text" id="pdpDefault" />
+		<input type="text" id="pdpDark" /><br><br><br><br><br><br><br><br><br><br><br><br>
+		<input type="text" id="pdpLatoja" />
+		<input type="text" id="pdpLightorang" /><br><br><br><br><br><br><br><br><br><br><br><br>
+		<input type="text" id="pdpMelon" />	
+	  </section>
+	  
       <section>
         <h2>
 <a id="about" class="anchor" href="#about" aria-hidden="true"><span class="octicon octicon-link"></span></a>About</h2>

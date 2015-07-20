@@ -1,0 +1,190 @@
+
+@keyframes start {
+    from {
+        transform: scale(.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes start {
+    from {
+        -webkit-transform: scale(.5);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+.rtl{direction:rtl}
+.pdp-default {
+    position: absolute;    
+    direction: rtl;    
+    color: #555;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.19);
+}
+
+.pdp-default ::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.pdp-default ::-webkit-scrollbar
+{
+	width: 15px;
+	background-color: #F5F5F5;
+}
+
+.pdp-default ::-webkit-scrollbar-thumb
+{
+	background-color: #444444;
+}
+.pdp-default ::selection{
+    color: #67cdcc;
+}
+
+.pdp-default .header{
+    background-color: #ffffff;
+    border-top: 2px solid #999;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    border-bottom: none;   
+    padding: 2px;
+    font-weight: bold;
+}
+
+.pdp-default .yearSelect{
+    overflow-y: auto;
+    direction: ltr;
+}
+
+.pdp-default .monthSelect li.desableMonth, .pdp-default .monthSelect li.desableMonth:hover{
+    color: #bbb;
+    background: #eee;
+}
+
+.pdp-default .yearSelect, .pdp-default .monthSelect{   
+    font:normal 12px Tahoma;
+    background: #f9f9f9;
+    border: 1px solid #ccc;    
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    width: 99.6%;    
+    text-align: right;    
+    z-index: 9999;    
+    animation: start 0.2s;
+    -webkit-animation: start 0.2s;    
+}
+.pdp-default  .selected{
+    background: #15a6eb;
+    color: #ffffff;
+}
+
+.pdp-default .yearSelect li, .pdp-default .monthSelect li {
+    padding: 1px;
+    cursor: default;
+    display: inline-table;    
+    text-align: center;       
+    border: 1px dotted #ddd;
+}
+.pdp-default .yearSelect li:hover, .pdp-default .monthSelect li:hover {
+    background: #FF9933;
+    color: #ffffff;
+    border-color: #FF7700;
+}
+
+.pdp-default .nextArrow{
+    right:0;
+}
+.pdp-default .prevArrow{
+    left:0;    
+}
+.pdp-default .monthYear{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pdp-default .nextArrow, .pdp-default .prevArrow{
+    cursor: pointer;    
+    position: absolute;
+    top:1px;
+    padding: 2px;
+}
+
+.pdp-default .nextArrow:hover, .pdp-default .prevArrow:hover{
+    color: #0073ea;
+}
+
+.pdp-default .cell {  
+    display: inline-block;    
+    cursor: default;
+    text-align: center; 
+}
+
+/* Days of the week */
+.pdp-default .dows {  
+    background: #5F5D5D;/*#006fe0;*/
+    color: #fff;    
+}
+.pdp-default .dow {            
+    font: bold 14px 'helvetica';
+    border: 1px solid #5F5D5D;
+}
+
+.pdp-default .days{
+    background-color: #ffffff;
+    border: 1px solid #999;
+    border-top: none;
+    font: normal 12px Tahoma;   
+}
+
+.pdp-default .day{
+    border: 1px solid #f1f1f1;    
+}
+
+.pdp-default .day:hover{
+    background: #f3f3f3;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+}
+.pdp-default .selday, .pdp-default .selday:hover{
+    background: #eadaa6;
+    border-color: #eb5b04;
+}
+
+.pdp-default .friday{
+    color: #f38;   
+}
+
+.pdp-default .today{
+    color: #fff;
+    background: #0073ea;
+}
+.pdp-default .today:hover{
+    color: #fff;
+    background: #0073ea;    
+}
+
+.pdp-default .nul{    
+    border: 1px solid #f1f1f1;  
+    background: #f1f1f1;  
+}
+
+.pdp-default .footer{    
+    background: #999;
+    font: normal 12px Tahoma;   
+    text-align: center;
+    height: 17px;
+}
+.pdp-default .footer .goToday{    
+    color: #f0f0f0;
+    text-decoration: none;    
+}
+.pdp-default .footer .goToday:hover{    
+    color: #ffffff;
+    text-decoration: overline;    
+}
