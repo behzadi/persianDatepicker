@@ -17,6 +17,29 @@
 </div>
 
 
+<script>
+
+var app = angular.module('newsFrom', []);
+app.controller('myCtrl', function($scope) {	
+	$scope.date = "NOT SELECTED YET!";
+	$scope.setDateVal = function () {
+		$scope.date = $(".publish").val();
+		$scope.$apply();
+	};
+});	
+
+$( ".publish" ).persianDatepicker({
+	cellWidth: 35, 
+	cellHeight: 30, 
+	onSelect: function(){		
+		angular.element($('#newsForm')).scope().setDateVal();				
+	}
+});
+
+</script>
+
+
+
 <pre style="background: #eee; border: 1px solid #222; border-radius:5px">
 <code>&lt;div ng-app="newsFrom" id="newsForm" ng-controller="myCtrl"&gt;
 	&lt;input type="text"  class="publish" /&gt;
@@ -42,29 +65,5 @@ $( ".publish" ).persianDatepicker({
 });
 &lt;/script&gt;</code>
 </pre>
-
-
-<script>
-
-var app = angular.module('newsFrom', []);
-app.controller('myCtrl', function($scope) {	
-	$scope.date = "NOT SELECTED YET!";
-	$scope.setDateVal = function () {
-		$scope.date = $(".publish").val();
-		$scope.$apply();
-	};
-});	
-
-$( ".publish" ).persianDatepicker({
-	cellWidth: 35, 
-	cellHeight: 30, 
-	onSelect: function(){		
-		angular.element($('#newsForm')).scope().setDateVal();				
-	}
-});
-
-
-</script>
-
 </body>
 </html>
