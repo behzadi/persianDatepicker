@@ -44,7 +44,7 @@
     color: #67cdcc;
 }
 
-.pdp-dark .header{
+.pdp-dark .pdp-header{
     background-color: #333;
     border-top: 2px solid #999;
     border-left: 1px solid #999;
@@ -174,17 +174,17 @@
     background: #777;  
 }
 
-.pdp-dark .footer{    
+.pdp-dark .pdp-footer{    
     background: #888;
     font: normal 12px Tahoma;   
     text-align: center;
     height: 17px;
 }
-.pdp-dark .footer .goToday{    
+.pdp-dark .pdp-footer .goToday{    
     color: #f0f0f0;
     text-decoration: none;    
 }
-.pdp-dark .footer .goToday:hover{    
+.pdp-dark .pdp-footer .goToday:hover{    
     color: #ffffff;
     text-decoration: overline;    
 }
