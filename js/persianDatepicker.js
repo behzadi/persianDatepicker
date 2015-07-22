@@ -172,19 +172,19 @@
         persianDatepicker.prototype = {
             show: function () {
                 this.calendar.show();
-                //$.each($('.pdp-el').not(this.el), function(i, o) {
-                //    if (o.length) {
-                //        o.options.onHide(o.calendar);
-                //    }
-                //});
+                $.each($('.pdp-el').not(this.el), function(i, o) {
+                    if (o.length) {
+                        o.options.onHide(o.calendar);
+                    }
+                });
                 this.options.onShow(this.calendar);
                 this.onresize();
             },
             hide: function () {
-                this.calendar.hide();
-                //if (this.options && !this.options.alwaysShow) {
-                //    this.options.onHide(this.calendar);
-                //}
+                //this.calendar.hide();
+                if (this.options && !this.options.alwaysShow) {
+                    this.options.onHide(this.calendar);
+                }
                 this.options.onHide(this.calendar);
             },
             render: function () {
@@ -198,7 +198,7 @@
                 var self = this;
                 _monthYear = $('<div class="" />');
                 _monthYear.appendTo(this.calendar);
-                _head = $('<div class="header" ' + self.headerStyle + ' />');
+                _head = $('<div class="pdp-header" ' + self.headerStyle + ' />');
                 _head.appendTo(this.calendar);
                 _next = $('<div class="nextArrow" />')
                     .html(this.options.nextArrow)
@@ -409,7 +409,7 @@
             },
             footer: function () {
                 var self = this;
-                _footer = $('<div class="footer" ' + self.footerStyle + ' />');
+                _footer = $('<div class="pdp-footer" ' + self.footerStyle + ' />');
                 _footer.appendTo(this.calendar);
 
                 if (self.options.selectableMonths._indexOf(self.persianDate.month) > -1) {

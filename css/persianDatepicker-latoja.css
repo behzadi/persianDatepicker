@@ -45,7 +45,7 @@
     color: #67cdcc;
 }
 
-.pdp-latoja .header{
+.pdp-latoja .pdp-header{
     background-color: #333333;    
     border: 1px solid #555555;   
     padding: 2px;
@@ -194,16 +194,16 @@ box-shadow: inset 0 4px 9px rgba(0,0,0,.24);
     background: #eeeeee;  
 }
 
-.pdp-latoja .footer{    
+.pdp-latoja .pdp-footer{    
     background: #777777;
     font: normal 12px Tahoma;   
     text-align: center;
     height: 17px;
 }
-.pdp-latoja .footer .goToday{
+.pdp-latoja .pdp-footer .goToday{
     color: #dddddd;
     text-decoration: none;    
 }
-.pdp-latoja .footer .goToday:hover{      
+.pdp-latoja .pdp-footer .goToday:hover{      
     text-decoration: overline;    
 }
