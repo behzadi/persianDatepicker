@@ -1,144 +1,343 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+
     <head>
-        <title>jQuery PERSIAN DatePicker</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <link type="text/css" rel="stylesheet" href="css/persianDatePicker-default.css" />
-        <style type="text/css">
-            *{margin:0; padding:0}
-            body{
-                padding: 10px 30px; 
-                font-family: Helvetica;
-            }
-            .dl{
-                padding: 20px;
-                text-align:center;
-				margin-bottom: 20px;
-            }
-			.dl img{
-                opacity: .6;
-            }
-			.dl img:hover{
-                opacity: 1;
-            }
-            a{color: #037;}
+        <title>jQuery Persian Datepicker - Documentation</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link href='css/normalize.css' rel='stylesheet' />
+        <link href='css/fontawesome/css/font-awesome.min.css' rel='stylesheet' />
+        <link href="css/vertical-responsive-menu.min.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" />
+        <link href="css/prism.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="css/persianDatepicker-default.css" />
+        <link rel="stylesheet" href="css/persianDatepicker-dark.css" />
+        <link rel="stylesheet" href="css/persianDatepicker-latoja.css" />
+        <link rel="stylesheet" href="css/persianDatepicker-melon.css" />
+        <link rel="stylesheet" href="css/persianDatepicker-lightorang.css" />
+
+        <script src="js/prism.js"></script>
+        <script src="js/vertical-responsive-menu.min.js"></script>
+    </head>
+
+    <body>
+
+        <header class="header clearfix">
+            <button type="button" id="toggleMenu" class="toggle_menu">
+                <i class="fa fa-bars"></i>
+            </button>
+            <h1>jQuery Persian Datepicker</h1>
+        </header>
+
+        <nav class="vertical_nav">
+
+            <ul id="js-menu" class="menu">
+
+                
+                <li class="menu--item">
+                    <a href="#usage" class="menu--link" title="usage">
+                        <i class="menu--icon  fa fa-fw fa-calendar"></i>
+                        <span class="menu--label">Usage</span>
+                    </a>
+                </li>
+                
+                <li class="menu--item ">
+
+                    <a href="#themes" class="menu--link" title="new themes">
+                        <i class="menu--icon  fa fa-fw fa-th"></i>
+                        <span class="menu--label">Themes</span>
+                    </a>
+
+                    <!--<ul class="sub_menu">
+                        <li class="sub_menu--item">
+                            <a href="#" class="sub_menu--link sub_menu--link__active">Submenu</a>
+                        </li>
+                        <li class="sub_menu--item">
+                            <a href="#" class="sub_menu--link">Submenu</a>
+                        </li>
+                        <li class="sub_menu--item">
+                            <a href="#" class="sub_menu--link">Submenu</a>
+                        </li>
+                    </ul>-->
+                </li>
+
+                <li class="menu--item">
+                    <a href="#multi-element" class="menu--link" title="">
+                        <i class="menu--icon  fa fa-fw fa-th-list"></i>
+                        <span class="menu--label">multi element</span>
+                    </a>
+                </li>
+
+                <li class="menu--item">
+                    <a href="#options" class="menu--link" title="All options">
+                        <i class="menu--icon  fa fa-fw fa-cog"></i>
+                        <span class="menu--label">Options</span>
+                    </a>
+                </li>
+
+                <li class="menu--item ">
+                    <a href="#format" class="menu--link" title="format">
+                        <i class="menu--icon  fa fa-fw fa-sort-amount-desc"></i>
+                        <span class="menu--label">Format</span>
+                    </a>
+                    
+                </li>
+
+                <li class="menu--item">
+                    <a href="#size" class="menu--link" title="size">
+                        <i class="menu--icon  fa fa-fw fa-arrows-alt"></i>
+                        <span class="menu--label">size</span>
+                    </a>
+                </li>                                                
+                
+                
+                <li class="menu--item">
+                    <a href="#startDate" class="menu--link" title="startDate & endDate">
+                        <i class="menu--icon  fa fa-fw fa-calendar"></i>
+                        <span class="menu--label">Range of date</span>
+                    </a>
+                </li>
+                
+                <li class="menu--item">
+                    <a href="#selectedDate" class="menu--link" title="selectedDate & selectedBefore">
+                        <i class="menu--icon  fa fa-fw fa-calendar-o"></i>
+                        <span class="menu--label">Select date</span>
+                    </a>
+                </li>
+                
+                 <li class="menu--item">
+                    <a href="https://github.com/behzadi/persianDatepicker" class="menu--link" title="download">
+                        <i class="menu--icon  fa fa-fw fa-download"></i>
+                        <span class="menu--label">Download</span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <button id="collapse_menu" class="collapse_menu">
+                <i class="collapse_menu--icon  fa fa-fw"></i>
+                <span class="collapse_menu--label">Recolher menu</span>
+            </button>
+
+        </nav>
+
+
+        <div class="wrapper">
+
+            <section id="usage">
+                <h1>jQuery Persian Datepicker</h1>
+                <p>A lightweight jQuery plugin that select persian(jalali) date with selectable years and months and other options.</p>
+                <h2> - Usage</h2>
+                <pre class="language-javascript"><code class="  language-javascript">
+    &lt;link rel="stylesheet" href="css/persianDatepicker-default.css" /&gt;
+    &lt;script src="js/jquery.min.js" &gt;&lt;/script&gt;
+    &lt;script src="js/persianDatepicker.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $("#elementId, .elementClass").persianDatepicker();
+    &lt;/script&gt;
+</code></pre>               
+            </section>
+
+            <section id="themes">                
+                <h2> - New themes</h2>
+                <input type="text" placeholder="default" id="pdpDefault" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="dark" id="pdpDark" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="latoja" id="pdpLatoja" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="lightorang" id="pdpLightorang" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="melon" id="pdpMelon" />
+            </section>                 
+
+            <section id="multi-element" style="margin-top: 200px">
+                <h2> - Multi element : text, label, span, div, p, ...</h2>
+                <input type="text" placeholder="a text box" class="usage" />
+                <span class="usage">a span</span>
+                <label class="usage">a label</label>
+            </section>            
+
+            <section id="options">
+                <h2> - All options</h2>
+                <pre class="language-javascript"><code class="  language-javascript">
+    $("jQuerySelectQuery").persianDatepicker({
+        months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
+        dowTitle: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
+        shortDowTitle: ["ش", "ی", "د", "س", "چ", "پ", "ج"],
+        showGregorianDate: !1,
+        persianNumbers: !0,
+        formatDate: "YYYY/MM/DD",
+        selectedBefore: !1,
+        selectedDate: null,
+        startDate: null,
+        endDate: null,
+        prevArrow: '\u25c4',
+        nextArrow: '\u25ba',
+        theme: 'default',
+        alwaysShow: !1,
+        selectableYears: null,
+        selectableMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        cellWidth: 25, // by px
+        cellHeight: 20, // by px
+        fontSize: 13, // by px                
+        isRTL: !1,
+        calendarPosition: {
+            x: 0,
+            y: 0,
+        },
+        onShow: function () { },
+        onHide: function () { },
+        onSelect: function () { }
+    });
+</code></pre>       
+            </section>
+
+            <section id="size">
+                <h2> - Customize the size</h2>
+                <input type="text" placeholder="small" id="pdpSmall" />&nbsp;
+                <input type="text" placeholder="big" id="pdpBig" />            
+                <pre class="language-javascript"><code class="  language-javascript">
+    $("#pdpBig").persianDatepicker({        
+        cellWidth: 78, 
+        cellHeight: 60,
+        fontSize: 18, 
+    });
+    $("#pdpSmall").persianDatepicker({        
+        cellWidth: 14, 
+        cellHeight: 12,
+        fontSize: 8, 
+    });
+</code></pre>      
+            </section>
             
-            input{
-                border: 1px solid #339;
-                padding: 3px;
-                font:bold 12px sans-serif;
-				width: 90px;
-            }
-            h1{color: #222;}
-            h3{color: #444;}
-            h4{color:#666;}
-            hr{color: #888; box-shadow: 1px 1px 8px 1px #999; margin-top: 5px;margin-bottom: 5px;}
-            pre{
-                background: #f9f9f9;
-                border: 1px solid #aaa;
-                padding: 10px;
-                margin: 10px;
-            }
-			
-        </style>
-        <link type="text/css" rel="stylesheet" href="js/prism/css-javascript.css" />
-        <script type="text/javascript" src="js/prism/css-javascript.js"></script>
-        <!----------------->
-        <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-        <script type="text/javascript" src="js/persianDatePicker.js"></script>
-        <script type="text/javascript">
+            <section id="format">
+                <h2> - Format selected date & time</h2>
+                <label>(date & time) YYYY/MM/DD hh:mm:ss:ms</label>
+                <input type="text" placeholder="YYYY/MM/DD hh:mm:ss:ms" id="pdpF1" /><br />
+                <label>(day & month with zero) YYYY-0M-0D</label>
+                <input type="text" placeholder="YYYY-0M-0D" id="pdpF2" /><br />
+                <label>(year & name of month & day of week & name of day) YYYY-NM-DW|ND</label>
+                <input type="text" placeholder="YYYY-NM-DW|ND" id="pdpF3" />
+                
+                <pre class="language-javascript"><code class="  language-javascript">
+    $("#pdpF1").persianDatepicker({
+        formatDate: "YYYY/MM/DD hh:mm:ss:ms"
+    });
+
+    $("#pdpF2").persianDatepicker({
+        formatDate: "YYYY-0M-0D"
+    });
+
+    $("#pdpF3").persianDatepicker({
+        formatDate: "YYYY-NM-DW|ND", 
+        isRTL:!0  //  isRTL:!0 => because of persian words direction
+    });  
+
+    YYYY  =>   year             : 1394  -  ...
+    MM    =>   month            : 1     -  12
+    DD    =>   day              : 1     -  30|31
+    0M    =>   month with zero  : 01    -  12
+    0D    =>   day  with zero   : 01    -  30|31
+    hh    =>   hour             : 0     -  23
+    mm    =>   minute           : 0     -  59
+    ss    =>   second           : 0     -  59
+    ms    =>   milisecond       : 0     -  3 digit random time of cpu like 359
+    NM    =>   name of month    : اسفند-فروردین
+    DW    =>   day of week      : 0     -  6
+    ND    =>   name of day      : جمعه-شنبه     
+</code></pre>     
+            </section>
+
+            <section id="startDate">
+                <h2> - startDate & endDate</h2>
+                <label>from 1394/11/12 to 1395/5/5</label>
+                <input type="text" id="pdpStartEnd" placeholder="between tow date" />                
+                <label>from today to 1395/5/5</label>
+                <input type="text" id="pdpStartToday" placeholder="startDate is today" />                
+                <label>from 1394/11/12 to today</label>
+                <input type="text" id="pdpEndToday" placeholder="endDate is today" />                
+                             <pre class="language-javascript"><code class="  language-javascript">
+    $("#pdpStartEnd").persianDatepicker({
+        startDate: "1394/11/12", 
+        endDate:"1395/5/5"
+    });
+
+    $("#pdpStartToday").persianDatepicker({
+        startDate: "today", 
+        endDate:"1395/5/5"
+    });
+
+    $("#pdpEndToday").persianDatepicker({
+        startDate: "1393/11/12", 
+        endDate:"today"
+    });
+</code></pre> 
+            </section>
+            
+            
+            <section id="selectedDate">
+                <h2> - selectedDate & selectedBefore</h2>
+                <label>selected date is 1395/5/5</label>
+                <input type="text" id="pdpSelectedDate" placeholder="selectedDate" />                
+                <label>select today date before</label>
+                <input type="text" id="pdpSelectedBefore" />                
+                <label>selectedDate & selectedBefore</label>
+                <input type="text" id="pdpSelectedBoth"  />
+                <pre class="language-javascript"><code class="  language-javascript">
+    $("#pdpSelectedDate").persianDatepicker({
+        selectedDate:"1395/5/5"
+    });
+
+    $("#pdpSelectedBefore").persianDatepicker({
+        selectedBefore: !0
+    });
+
+    $("#pdpSelectedBoth").persianDatepicker({
+        selectedBefore: !0, 
+        selectedDate:"1395/5/5"
+    });
+</code></pre> 
+            </section>
+            
+            
+        </div>
+
+        <script src="js/jquery-1.10.1.min.js" ></script>                
+        <script src="js/persianDatepicker.js"></script>
+        <script>
             $(function() {
-                $("#simpleText, #simpleLabel").persianDatepicker();
-                $("#selectedBefore").persianDatepicker({selectedBefore:true});    
-				$("#alwaysShow, #alwaysShow2").persianDatepicker({alwaysShow:true});    
-				
+                //usage
+                $(".usage").persianDatepicker();
+
+                //themes
+                $("#pdpDefault").persianDatepicker({alwaysShow: true, });
+                $("#pdpLatoja").persianDatepicker({theme: "latoja", alwaysShow: true, });
+                $("#pdpLightorang").persianDatepicker({theme: "lightorang", alwaysShow: true, });
+                $("#pdpMelon").persianDatepicker({theme: "melon", alwaysShow: true, });
+                $("#pdpDark").persianDatepicker({theme: "dark", alwaysShow: true, });
+
+                //size
+                $("#pdpSmall").persianDatepicker({ cellWidth: 14, cellHeight: 12, fontSize: 8});
+                $("#pdpBig").persianDatepicker({cellWidth: 78, cellHeight: 60, fontSize: 18});
+                
+                //formatting
+                $("#pdpF1").persianDatepicker({formatDate: "YYYY/MM/DD hh:mm:ss:ms"});
+                $("#pdpF2").persianDatepicker({formatDate: "YYYY-0M-0D"});
+                $("#pdpF3").persianDatepicker({formatDate: "YYYY-NM-DW|ND", isRTL:!0});
+                
+                //startDate & endDate
+                $("#pdpStartEnd").persianDatepicker({startDate: "1394/11/12", endDate:"1395/5/5"});
+                $("#pdpStartToday").persianDatepicker({startDate: "today", endDate:"1395/5/5"});
+                $("#pdpEndToday").persianDatepicker({startDate: "1393/11/12", endDate:"today"});
+                
+                //selectedBefor & selectedDate
+                $("#pdpSelectedDate").persianDatepicker({selectedDate:"1395/5/5"});
+                $("#pdpSelectedBefore").persianDatepicker({selectedBefore: !0});               
+                $("#pdpSelectedBoth").persianDatepicker({selectedBefore: !0, selectedDate:"1395/5/5"});               
+
             });
         </script>
-        <!----------------->
-    </head>
-    <body>
-        
-        <h3>a lightweight jQuery plugin for select persian date with selectable months and years and other options</h3>
-        <hr>
-        <div class="dl">        
-            
-			
-			<a href="http://github.com/behzadi/persianDatePicker"><img src="http://github.com/favicon.ico" /></a>
-			<br />
-			<a href="mailto:mohammadhasan.behzadi.com">mohammadhasan.behzadi@gmail.com</a>
-			
-        </div>
-		persian date: 
-            <input type="text" id="simpleText" placeholder="select date" />
-            a label : 
-            <label id="simpleLabel" style="background: #ccc; width:90px;">click me...</label> 
-			selected before: 
-            <input type="text" id="selectedBefore" placeholder="select date" />
-			 show always: 
-            <input type="text" id="alwaysShow" placeholder="select date" />
-			<input type="text" id="alwaysShow2" placeholder="select date" />
-			<br /><br />
-<article class="markdown-body entry-content" itemprop="mainContentOfPage"><h2>
 
-</h2>
 
-<br />
-<h2>
-<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
-<br />
-<p>persianDatepicker is A lightweight jQuery plugin that select persian(jalali) date. </p>
-
-<ul>
-<li>
-<strong>Light weight:</strong> ~14k minified</li>
-<li><strong>Beautiful themes:</strong>soon</li> 
-<li>
-<strong>Size and font:</strong> set the size (width &amp; height) and fontsize for datepicker cells</li>
-<li>
-<strong>Show persian numbers:</strong> (۰ - ۹)</li>
-<li>
-<strong>Select gregorian date:</strong> (good way to convert jalali date to gregorian date)</li>
-<li>
-<strong>Multi formatting date:</strong> like ("YYYY/NM/DD hh:ss") becomes like <strong>1392/7/22 16:45</strong>
-</li>
-<li>
-<strong>Selectable months and years:</strong>  [1, 3, 4, 12]</li>
-</ul><h2>
-<br />
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
-
-<br />
-<p>1- include jQuery &amp; persianDatepicker.js &amp; persianDatepicker.css</p>
-
-<div class="highlight highlight-html"><pre><span class="nt">&lt;link</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/persianDatepicker.css"</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"js/jquery-1.10.1.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"js/persianDatepicker.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
-
-<p>2- add your html element (input or span or etc)</p>
-
-<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"input1"</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"span1"</span><span class="nt">&gt;&lt;/span&gt;</span>
-</pre></div>
-
-<p>3- call the persianDatepicker plugin</p>
-
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
-    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s2">"#input1, #span1"</span><span class="p">).</span><span class="nx">persianDatePicker</span><span class="p">();</span>       
-    <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
-</pre></div>
-
-<br />
-
-<p>use, share , <a href="http://github.com/behzadi">fork</a> , enjoy! , ...</p>
-			</article>
-        <br />
-        <hr />
-        <div>&copy; copy right by <a href="http://mbehzadi.com">mbehzadi.com</a></div>
-        
     </body>
 </html>
-

@@ -19,6 +19,7 @@
 .rtl{direction:rtl}
 .pdp-dark {
     position: absolute;    
+    display: inline-block;
     direction: rtl;    
     color: #f2f2f2;
     box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.49);
@@ -72,10 +73,11 @@
     position: absolute;
     padding: 0;
     width: 99.6%;    
-    text-align: right;    
+    text-align: center;    
     z-index: 9999;    
     animation: start 0.2s;
     -webkit-animation: start 0.2s;	
+    margin: 0 auto;
 }
 .pdp-dark  .selected{
     background: #15a6eb;
@@ -173,6 +175,13 @@
     border: 1px solid #777;  
     background: #777;  
 }
+
+.pdp-dark .disday, .pdp-dark .disday:hover{
+    color: #B7B5B5;
+    background: #777777;
+    cursor: not-allowed;
+}
+
 
 .pdp-dark .pdp-footer{    
     background: #888;

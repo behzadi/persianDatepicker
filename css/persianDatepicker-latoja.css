@@ -80,7 +80,7 @@ background-image: linear-gradient(bottom, rgba(0,0,0,.21) 0%, rgba(255,255,255,.
     position: absolute;
     padding: 0;
     width: 99.6%;    
-    text-align: right;    
+    text-align: center;    
     z-index: 9999;    
     animation: start 0.2s;
     -webkit-animation: start 0.2s;
@@ -192,6 +192,12 @@ box-shadow: inset 0 4px 9px rgba(0,0,0,.24);
 .pdp-latoja .nul{    
     border: 1px solid #eeeeee;  
     background: #eeeeee;  
+}
+
+.pdp-latoja .disday, .pdp-latoja .disday:hover {
+    color: #B7B5B5;
+    background: #EEEEEE;
+    cursor: not-allowed;
 }
 
 .pdp-latoja .pdp-footer{    

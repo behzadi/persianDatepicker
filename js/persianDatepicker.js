@@ -66,8 +66,8 @@
             self.cellStyle = "style='width:" + _cw + "px;height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + (_fontSize) + "px; ' ";
             self.headerStyle = "style='height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + (_fontSize + 4) + "px;' ";
             self.selectUlStyle = "style='margin-top:" + _ch + "px;height:" + (_ch * 7 + 20) + "px; font-size:" + (_fontSize - 2) + "px;' ";
-            self.selectMonthLiStyle = "style='height:" + (_ch * 7 + 7) / (4) + "px;line-height:" + (_ch * 7 + 7) / (4) + "px; width:" + (7 * _cw + 1) / (3) + "px;width:" + (7 * _cw) / (3) + "px\\9;' ";
-            self.selectYearLiStyle = "style='height:" + (_ch * 7 + 10) / (6) + "px;line-height:" + (_ch * 7 + 10) / (6) + "px; width:" + (7 * _cw - 14) / (3) + "px;width:" + (7 * _cw - 15) / (3) + "px\\9;' ";
+            self.selectMonthLiStyle = "style='height:" + (_ch * 7 + 7) / (4) + "px;line-height:" + (_ch * 7 + 7) / (4) + "px; width:" + (6.7 * _cw) / (3) + "px;width:" + (6.7 * _cw) / (3) + "px\\9;' ";
+            self.selectYearLiStyle = "style='height:" + (_ch * 7 + 10) / (6) + "px;line-height:" + (_ch * 7 + 10) / (6) + "px; width:" + (6.7 * _cw - 14) / (3) + "px;width:" + (6.7 * _cw - 15) / (3) + "px\\9;' ";
             self.footerStyle = "style='height:" + _ch + "px;line-height:" + _ch + "px; font-size:" + _fontSize + "px;' ";
 
             self.jDateFunctions = new jDateFunctions();            

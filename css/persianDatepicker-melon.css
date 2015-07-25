@@ -71,7 +71,7 @@
     position: absolute;
     padding: 0;
     width: 99.6%;    
-    text-align: right;    
+    text-align: center;    
     z-index: 9999;    
     animation: start 0.2s;
     -webkit-animation: start 0.2s;
@@ -150,7 +150,7 @@
 }
 .pdp-melon .selday, .pdp-melon .selday:hover{
     background: #2e3641;
-    border-color: #2e3641;	
+    border-color: #FFFFFF;	
 }
 
 .pdp-melon .friday{
@@ -165,7 +165,7 @@
 .pdp-melon .disday,
 .pdp-melon .disday:hover {
     color: #666666;
-    background: #bbbbbb;
+    background: #F97E76;
 }
 
 .pdp-melon .today:hover{
@@ -177,7 +177,11 @@
     border: 1px solid #f97e76;  
     background: #f97e76;  
 }
-
+.pdp-melon .disday, .pdp-melon .disday:hover {
+    color: #929090;
+    background: #F97E76;
+    cursor: not-allowed;
+}
 .pdp-melon .pdp-footer{    
     background: #2e3641;
     font: normal 12px Tahoma;   
