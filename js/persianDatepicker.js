@@ -118,16 +118,17 @@
 
             el
                     .addClass('pdp-el')
-                    .bind('click', function(e) {
+                    .on('click', function(e) {
                         self.show(e);
                     })
-                    .bind('focus', function(e) {
+                    .on('focus', function(e) {
                         self.show(e);
                     });
 
             if (options.closeOnBlur) {
-                el.bind('blur', function(e) {
-                    self.hide();
+                el.on('blur', function(e) {
+                    if(!self.calendar.is(":hover"))
+                        self.hide(e);
                 });
             }
 
@@ -193,11 +194,13 @@
                 this.onresize();
             },
             hide: function() {
+                this.options.onHide(this.calendar);
                 //this.calendar.hide();
+
                 if (this.options && !this.options.alwaysShow) {
-                    this.options.onHide(this.calendar);
                     this.calendar.hide();
                 }
+
             },
             render: function() {
                 this.calendar.children().remove();
@@ -403,6 +406,7 @@
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + ' ' + _disday + '" ' + self.cellStyle + ' />');
                             _cell.data("date", {jDate: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt)._toString(self.options.formatDate)});
                             _cell.html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(cellIndex - _start + 1) : cellIndex - _start + 1);
+                            
                             if (self.options.startDate == undefined || (self.persianDate.parse(self.options.startDate).compare(_dt) != -1 && self.persianDate.parse(self.options.endDate).compare(_dt) != 1))
                                 _cell.bind("click", function() {
                                     self.calendar.find(".day").removeClass("selday");
@@ -411,7 +415,8 @@
                                         self.showDate(self.el, $(this).data('date').gDate);
                                     else
                                         self.showDate(self.el, $(this).data('date').jDate);
-                                    self.calendar.hide();
+
+                                    self.hide();
                                 });
                         }
                         _cell.appendTo(_row);
@@ -447,10 +452,10 @@
                 }
             },
             showDate: function(el, v) {
-                var self = this;
-                if (el.is('input')) {
+                var self = this;                
+                if (el.is('input:text')) {                    
                     el.val(self.persianDate.parse(v).toString(self.options.formatDate));
-                } else {
+                } else {                    
                     el.html(self.persianDate.parse(v).toString(self.options.formatDate));
                 }
                 el.data('date', {jDate: v, gDate: this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW")});
