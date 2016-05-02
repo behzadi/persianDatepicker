@@ -11,7 +11,7 @@
  * Date: Tue Jan 1 2013
  */
 ;
-(function() {
+(function( $ ) {
     $.fn.persianDatepicker = function(options) {
         var pluginName = 'persianDatepicker';
         var instance = this.data(pluginName);
@@ -509,7 +509,7 @@
             return $.inArray(value, this);
         };
     })();
-})();// end of persianDatepicker plugin
+})(jQuery);// end of persianDatepicker plugin
 
 // persianDate object
 var persianDate = (function() {
