@@ -23,6 +23,7 @@
     color: #515d65;
     background: #eee;
     box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.49);
+	z-index: 99999;
 }
 
 .pdp-latoja ::-webkit-scrollbar-track
