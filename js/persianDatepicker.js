@@ -11,19 +11,19 @@
  * Date: Tue Jan 1 2013
  */
 ;
-(function() {
-    $.fn.persianDatepicker = function(options) {
+(function ($) {
+    $.fn.persianDatepicker = function (options) {
         var pluginName = 'persianDatepicker';
         var instance = this.data(pluginName);
         if (!instance) {
-            return this.each(function() {
+            return this.each(function () {
                 return $(this).data(pluginName, new persianDatepicker(this, options));
             });
         }
         return (options === true) ? instance : this;
     };
     // persianDatepicker object
-    var persianDatepicker = (function() {
+    var persianDatepicker = (function () {
         function persianDatepicker(element, userOptions) {
             var defaults = {
                 months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
@@ -51,11 +51,11 @@
                     x: 0,
                     y: 0,
                 },
-                onShow: function() {
+                onShow: function () {
                 },
-                onHide: function() {
+                onHide: function () {
                 },
-                onSelect: function() {
+                onSelect: function () {
                 }
             };
             var self = this;
@@ -118,40 +118,39 @@
 
             el
                     .addClass('pdp-el')
-                    .on('click', function(e) {
+                    .on('click', function (e) {
                         self.show(e);
                     })
-                    .on('focus', function(e) {
+                    .on('focus', function (e) {
                         self.show(e);
                     });
 
+            // close on blur
             if (options.closeOnBlur) {
-                el.on('blur', function(e) {
-                    if(!self.calendar.is(":hover"))
+                el.on('blur', function (e) {
+                    if (!self.calendar.is(":hover"))
                         self.hide(e);
                 });
             }
 
-            if (options.selectedBefore && !options.showGregorianDate) {
-                if (self.options.selectedDate != undefined)
-                    self.showDate(el, self.persianDate.parse(self.options.selectedDate).toString(options.formatDate));
-                else
-                    self.showDate(el, self.now().toString(options.formatDate));
-            }
+            if (options.selectedBefore) {
+               
 
-            if (options.selectedBefore && options.showGregorianDate) {
-                if (self.options.selectedDate != undefined)
-                    self.showDate(el, self.persianDate.parse(self.options.selectedDate).gDate._toString(self.options.formatDate));
-                else
-                    self.showDate(el, self.now().gDate._toString(self.options.formatDate));
-            }
+                if (self.options.selectedDate != undefined) {
+                    jd = self.jDateFunctions.getJulianDayFromPersian(self.persianDate.parse(self.options.selectedDate));
+                    self.showDate(el, self.persianDate.parse(self.options.selectedDate).toString("YYYY/MM/DD/" + self.jDateFunctions.getWeekday(jd)), self.now().gDate, options.showGregorianDate);
+                } else {
+                    jd = self.jDateFunctions.getJulianDayFromPersian(self.now());
+                    self.showDate(el, self.now().toString("YYYY/MM/DD/" + self.jDateFunctions.getWeekday(jd)), self.now().gDate, options.showGregorianDate);
+                }
+            }            
 
             if (options.isRTL)
                 el.addClass('rtl');
             if (self.calendar.length && !options.alwaysShow) {
                 self.calendar.hide();
             }
-            $(document).bind('mouseup', function(e) {
+            $(document).bind('mouseup', function (e) {
                 var target = e.target;
                 var calendar = self.calendar;
                 if (!el.is(target) && !calendar.is(target) && calendar.has(target).length === 0 && calendar.is(':visible')) {
@@ -166,7 +165,7 @@
                     container.hide();
                 }
             });
-            var onResize = function() {
+            var onResize = function () {
                 var elPos = el.offset();
                 self.calendar.css(
                         {
@@ -181,11 +180,12 @@
             onResize();
         }
         ;
+
         // persianDatepicker methods
         persianDatepicker.prototype = {
-            show: function() {
+            show: function () {
                 this.calendar.show();
-                $.each($('.pdp-el').not(this.el), function(i, o) {
+                $.each($('.pdp-el').not(this.el), function (i, o) {
                     if (o.length) {
                         o.options.onHide(o.calendar);
                     }
@@ -193,7 +193,7 @@
                 this.options.onShow(this.calendar);
                 this.onresize();
             },
-            hide: function() {
+            hide: function () {
                 this.options.onHide(this.calendar);
                 //this.calendar.hide();
 
@@ -202,14 +202,14 @@
                 }
 
             },
-            render: function() {
+            render: function () {
                 this.calendar.children().remove();
                 this.header();
                 this.dows();
                 this.content();
                 this.footer();
             },
-            header: function() {
+            header: function () {
                 var self = this;
                 _monthYear = $('<div class="" />');
                 _monthYear.appendTo(this.calendar);
@@ -221,9 +221,9 @@
 
                 /*yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy*/
                 if (self.options.endDate == null || (self.persianDate.parse(self.options.endDate).year > self.persianDate.year || self.persianDate.parse(self.options.endDate).month > self.persianDate.month)) {
-                    _next.bind("click", function() {
+                    _next.bind("click", function () {
                         nextMonth = self.persianDate.month + 1;
-                        for (; self.options.selectableMonths._indexOf(nextMonth) == - 1 && nextMonth < 13; nextMonth++)
+                        for (; self.options.selectableMonths._indexOf(nextMonth) == -1 && nextMonth < 13; nextMonth++)
                             ;
                         self.persianDate.addMonth(nextMonth - self.persianDate.month);
                         self.render();
@@ -239,23 +239,23 @@
                 // Build month label
                 var _monthText = $('<span/>')
                         .html(self.options.months[self.persianDate.month - 1])
-                        .mousedown(function() {
+                        .mousedown(function () {
                             return false;
                         })
-                        .click(function(e) {
+                        .click(function (e) {
                             e.stopPropagation();
-                            _yearSelect.css({display: 'none'});
-                            _monthSelect.css({display: 'inline-block'});
+                            _yearSelect.css({ display: 'none' });
+                            _monthSelect.css({ display: 'inline-block' });
                         });
                 var _yearText = $('<span/>')
                         .html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(self.persianDate.year) : self.persianDate.year)
-                        .mousedown(function() {
+                        .mousedown(function () {
                             return false;
                         })
-                        .click(function(e) {
+                        .click(function (e) {
                             e.stopPropagation();
-                            _monthSelect.css({display: 'none'});
-                            _yearSelect.css({display: 'inline-block'});
+                            _monthSelect.css({ display: 'none' });
+                            _yearSelect.css({ display: 'inline-block' });
                             _yearSelect.scrollTop(70);
                         });
 
@@ -264,7 +264,7 @@
                 _endDate = self.options.endDate != null ? self.persianDate.parse(self.options.endDate) : self.persianDate.parse("9999/1/1");
 
                 // selectable years
-                var getSelectableYears = function(f, l) {
+                var getSelectableYears = function (f, l) {
                     var pre = !1;
                     if (f === undefined && l === undefined) {
                         b = self.persianDate.year - 7;
@@ -280,13 +280,13 @@
                     var arr = [];
                     for (i = b; i < a && b > 0; i++)
                         arr.push(parseInt(i));
-                    $.each(self.options.selectableYears || ((pre) ? arr.reverse() : arr), function(i, v) {
+                    $.each(self.options.selectableYears || ((pre) ? arr.reverse() : arr), function (i, v) {
                         var o = $('<li ' + self.selectYearLiStyle + ' />').html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(v) : v);
                         if (v == self.persianDate.year) {
                             o.addClass('selected');
                         }
                         o.attr("value", v);
-                        o.bind("click", function() {
+                        o.bind("click", function () {
                             self.persianDate.date = 1;
                             self.persianDate.year = parseInt(v);
                             if (_endDate.year == v || _endDate.year == 9999)
@@ -301,16 +301,15 @@
                 getSelectableYears();
 
                 // selectable months                
-
                 for (i = 1; i <= 12; i++) {
                     var m = self.options.months[i - 1];
                     var o = (self.options.selectableMonths._indexOf(i) == -1 || (_startDate.year == self.persianDate.year && _startDate.month > i) || (_endDate.year == self.persianDate.year && i > _endDate.month)) ? $('<li class="disableMonth" ' + self.selectMonthLiStyle + ' />').html(m) : $('<li ' + self.selectMonthLiStyle + ' />').html(m);
                     if (i == self.persianDate.month) {
                         o.addClass('selected');
                     }
-                    o.data('month', {month: m, monthNum: i});
+                    o.data('month', { month: m, monthNum: i });
                     if (!o.hasClass('disableMonth')) {
-                        o.bind("click", function() {
+                        o.bind("click", function () {
                             self.persianDate.date = 1;
                             self.persianDate.month = $(this).data('month').monthNum;
                             self.render();
@@ -320,7 +319,7 @@
                 }
 
                 // selectable years
-                _yearSelect.bind("scroll", function() {
+                _yearSelect.bind("scroll", function () {
                     if (self.options.selectableYears == undefined) {
                         c = $(this).find("li").length;
                         firstYear = parseInt($(this).children("li:first").val());
@@ -352,9 +351,9 @@
                         .attr('title', 'ماه قبل');
 
                 if (self.options.startDate == null || (self.persianDate.parse(self.options.startDate).year < self.persianDate.year || self.persianDate.parse(self.options.startDate).month < self.persianDate.month)) {
-                    _prev.bind("click", function() {
+                    _prev.bind("click", function () {
                         prevMonth = self.persianDate.month - 1;
-                        for (; self.options.selectableMonths._indexOf(prevMonth) == - 1 && prevMonth > 0; prevMonth--)
+                        for (; self.options.selectableMonths._indexOf(prevMonth) == -1 && prevMonth > 0; prevMonth--)
                             ;
                         self.persianDate.addMonth(-(self.persianDate.month - prevMonth));
                         self.render();
@@ -367,7 +366,7 @@
                 _prev.appendTo(_head);
             },
             // days of week title
-            dows: function() {
+            dows: function () {
                 _row = $('<div class="dows" />');
                 for (i = 0; i < 7; i++) {
                     _cell = $('<div class="dow cell " ' + this.cellStyle + ' />')
@@ -376,7 +375,7 @@
                 }
                 _row.appendTo(this.calendar);
             },
-            content: function() {
+            content: function () {
                 var self = this;
                 _days = $('<div class="days" />');
                 _days.appendTo(this.calendar);
@@ -395,8 +394,10 @@
                             _today = '', _selday = '', _disday = '';
                             if (self.now().compare(_dt) == 0)
                                 _today = 'today';
+
                             if (self.options.startDate != null && (self.persianDate.parse(self.options.startDate).compare(_dt) == -1 || self.persianDate.parse(self.options.endDate).compare(_dt) == 1))
                                 _disday = 'disday';
+
                             if (self.options.selectedDate != undefined) {
                                 if (self.persianDate.parse(self.options.selectedDate).date == cellIndex - _start + 1)
                                     _selday = 'selday';
@@ -404,17 +405,17 @@
                                 _selday = 'selday';
                             _fri = col == 6 ? 'friday' : '';
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + ' ' + _disday + '" ' + self.cellStyle + ' />');
-                            _cell.data("date", {jDate: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt)._toString(self.options.formatDate)});
+                            _cell.data("date", { jDate: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt) });
                             _cell.html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(cellIndex - _start + 1) : cellIndex - _start + 1);
-                            
+
                             if (self.options.startDate == undefined || (self.persianDate.parse(self.options.startDate).compare(_dt) != -1 && self.persianDate.parse(self.options.endDate).compare(_dt) != 1))
-                                _cell.bind("click", function() {
+                                _cell.bind("click", function () {
                                     self.calendar.find(".day").removeClass("selday");
                                     $(this).addClass("selday");
                                     if (self.options.showGregorianDate)
-                                        self.showDate(self.el, $(this).data('date').gDate);
+                                        self.showDate(self.el, $(this).data('date').jDate, $(this).data('date').gDate, !0);
                                     else
-                                        self.showDate(self.el, $(this).data('date').jDate);
+                                        self.showDate(self.el, $(this).data('date').jDate, $(this).data('date').gDate, !1);
 
                                     self.hide();
                                 });
@@ -425,24 +426,23 @@
                 }
 
             },
-            footer: function() {
+            footer: function () {
                 var self = this;
                 _footer = $('<div class="pdp-footer" ' + self.footerStyle + ' />');
                 _footer.appendTo(this.calendar);
 
                 if (self.options.selectableMonths._indexOf(self.persianDate.month) > -1) {
                     _goToday = $('<a class="goToday" />');
-                    _goToday.data("date", {jDate: self.now().toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(self.now())._toString(self.options.formatDate)});
+                    _goToday.data("date", { jDate: self.now().toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(self.now()) });
                     _goToday
                             .attr("href", "javascript:;")
                             .html('هم اکنون');
                     if (self.options.startDate == null)
-                        _goToday.bind("click", function() {
+                        _goToday.bind("click", function () {
                             self.persianDate = self.now();
-                            if (self.options.showGregorianDate)
-                                self.showDate(self.el, $(this).data('date').gDate);
-                            else
-                                self.showDate(self.el, $(this).data('date').jDate);
+                            
+                            self.showDate(self.el, $(this).data('date').jDate, $(this).data('date').gDate, self.options.showGregorianDate);
+                           
                             self.calendar.find(".day").removeClass("selday");
                             self.render();
                             self.calendar.find(".today").addClass("selday");
@@ -451,22 +451,35 @@
                     _goToday.appendTo(_footer);
                 }
             },
-            showDate: function(el, v) {
-                var self = this;                
-                if (el.is('input:text')) {                    
-                    el.val(self.persianDate.parse(v).toString(self.options.formatDate));
-                } else {                    
-                    el.html(self.persianDate.parse(v).toString(self.options.formatDate));
+            showDate: function (el, jDate, gDate, showGdate) {
+                var self = this;
+                jDate = self.persianDate.parse(jDate).toString(self.options.formatDate);
+                gDate = gDate._toString(self.options.formatDate)
+                if (el.is('input:text')) {
+                    if(showGdate)
+                        el.val(gDate);
+                    else
+                        el.val(jDate);
+                } else {
+                    if (showGdate)
+                        el.html(gDate);
+                    else
+                        el.html(jDate);
                 }
-                el.data('date', {jDate: v, gDate: this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW")});
+                if (showGdate)
+                    el.attr('data-jDate', jDate);
+                else
+                    el.attr('data-gDate', gDate);
+
+                //this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW")
                 this.options.onSelect();
             },
-            getDate: function(jd, d) {
+            getDate: function (jd, d) {
                 jd.date = d;
                 jd.day = this.jDateFunctions.getWeekday(this.jDateFunctions.getJulianDayFromPersian(jd))
                 return jd;
             },
-            now: function() {
+            now: function () {
                 return this.jDateFunctions.getPCalendarDate(this.jDateFunctions.getJulianDay(new Date()));
             },
         };
@@ -474,15 +487,15 @@
         return persianDatepicker;
     })();
 
-    (function() {
+    (function () {
         //padleft
-        Number.prototype.padLeft = function(base, chr) {
+        Number.prototype.padLeft = function (base, chr) {
             var len = (String(base || 10).length - String(this).length) + 1;
             return len > 0 ? new Array(len).join(chr || '0') + this : this;
         }
 
         // format Date with _toString()
-        Date.prototype._toString = function(formatDate) {
+        Date.prototype._toString = function (formatDate) {
             months = ["Januray", "February", "March", "April", "May", "June", "Julay", "August", "September", "October", "November", "December"];
             dows = ["Sun", "Mon", "Tue", "Wed", "Tur", "Fri", "Sat"];
             if (formatDate === undefined || formatDate == "default")
@@ -505,14 +518,14 @@
                     )
         };
         //    _indexOf() for arrays
-        Array.prototype._indexOf = function(value) {
+        Array.prototype._indexOf = function (value) {
             return $.inArray(value, this);
         };
     })();
-})();// end of persianDatepicker plugin
+})(jQuery);// end of persianDatepicker plugin
 
 // persianDate object
-var persianDate = (function() {
+var persianDate = (function () {
     function persianDate() {
         var self = this;
         self.months = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
@@ -525,7 +538,7 @@ var persianDate = (function() {
     }
     ;
     persianDate.prototype = {
-        addMonth: function(d) {
+        addMonth: function (d) {
             this.month += d;
             if (this.month >= 13) {
                 this.month = 1;
@@ -536,10 +549,10 @@ var persianDate = (function() {
             }
             return this;
         },
-        addYear: function(d) {
+        addYear: function (d) {
             this.year += d;
         },
-        compare: function(d) {
+        compare: function (d) {
             if (d.year == this.year && d.month == this.month && d.date == this.date)
                 return 0;
             if (d.year > this.year)
@@ -550,7 +563,7 @@ var persianDate = (function() {
                 return 1;
             return -1;
         },
-        parse: function(s) {
+        parse: function (s) {
             arr = s.split("/");
             y = arr[0];
             m = arr[1];
@@ -562,7 +575,7 @@ var persianDate = (function() {
                     , r.day = wd, r.gDate = jdf.getGCalendarDate(jdf.getJulianDayFromPersian(r), "jgmonth");
             return r;
         },
-        toString: function(formatDate) {
+        toString: function (formatDate) {
             if (formatDate === undefined)
                 return this.year + "/" + this.month + "/" + this.date;
             return (
@@ -587,13 +600,13 @@ var persianDate = (function() {
 })();
 
 //  jalali Date Functions from NASA.gov 
-var jDateFunctions = (function() {
+var jDateFunctions = (function () {
     function jDateFunctions() {
     }
     ;
 
     jDateFunctions.prototype = {
-        toPersianNums: function(s) {
+        toPersianNums: function (s) {
             strnum = s.toString();
             nums = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
             res = '';
@@ -601,10 +614,10 @@ var jDateFunctions = (function() {
                 res += nums[parseInt(strnum[i])];
             return res;
         },
-        getGDate: function(pd) {
+        getGDate: function (pd) {
             return this.getGCalendarDate(this.getJulianDayFromPersian(pd), "gmonth");
         },
-        getPCalendarDate: function(jd) {
+        getPCalendarDate: function (jd) {
             var y = 0;
             var m = 0;
             var day = 0.0;
@@ -652,7 +665,7 @@ var jDateFunctions = (function() {
                     r.gDate = new Date();
             return r;
         },
-        getGCalendarDate: function(jd, dateformat) {
+        getGCalendarDate: function (jd, dateformat) {
             var y = 0;
             var m = 0;
             var day = 0.0;
@@ -692,7 +705,7 @@ var jDateFunctions = (function() {
             return new Date(y, m - 1, day, r.getHours(), r.getMinutes(), r.getSeconds(), r.getMilliseconds());
         },
         /* function getJulianDay(originalY, originalM, originalD) */
-        getJulianDay: function(d, jgGOrJ) {
+        getJulianDay: function (d, jgGOrJ) {
             /* jgGOrJ: 0 = auto Julian/Gregorian; 1 = Gregorian; 2 = Julian */
             var jgGOrJ = (jgGOrJ === undefined) ? 0 : jgGOrJ;
             /* Given UT */
@@ -761,18 +774,18 @@ var jDateFunctions = (function() {
             var jd = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + b - 1524.5;
             return jd;
         },
-        getJulianDayFromPersian: function(pd) {
+        getJulianDayFromPersian: function (pd) {
             y0 = pd.year, m0 = pd.month, d0 = pd.date;
             var epbase = y0 - ((y0 >= 0) ? 474 : 473);
             var epyear = 474 + (epbase % 2820);
             return d0 + ((m0 <= 7) ? ((m0 - 1) * 31) : (((m0 - 1) * 30) + 6)) + Math.floor(((epyear * 682) - 110) / 2816) + (epyear - 1) * 365 + Math.floor(epbase / 2820) * 1029983 + (1948320.5 - 1);
         },
-        getWeekday: function(jd) {
+        getWeekday: function (jd) {
             wds = [1, 2, 3, 4, 5, 6, 0];
             wd = Math.floor((jd + 1.5) % 7.0);
             return wds[wd];
         },
-        getLastDayOfPersianMonth: function(pd) {
+        getLastDayOfPersianMonth: function (pd) {
             y = pd.year, m = pd.month;
             if (m >= 1 && m <= 6) {
                 return 31;
