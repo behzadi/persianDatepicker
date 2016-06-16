@@ -405,7 +405,8 @@
                                 _selday = 'selday';
                             _fri = col == 6 ? 'friday' : '';
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + ' ' + _disday + '" ' + self.cellStyle + ' />');
-                            _cell.data("date", { jDate: _dt.toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(_dt) });
+                            _cell.attr("data-jdate", _dt.toString("YYYY/MM/DD/DW"));
+                            _cell.attr("data-gdate", self.jDateFunctions.getGDate(_dt)._toString("YYYY/MM/DD"));
                             _cell.html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(cellIndex - _start + 1) : cellIndex - _start + 1);
 
                             if (self.options.startDate == undefined || (self.persianDate.parse(self.options.startDate).compare(_dt) != -1 && self.persianDate.parse(self.options.endDate).compare(_dt) != 1))
@@ -413,9 +414,9 @@
                                     self.calendar.find(".day").removeClass("selday");
                                     $(this).addClass("selday");
                                     if (self.options.showGregorianDate)
-                                        self.showDate(self.el, $(this).data('date').jDate, $(this).data('date').gDate, !0);
+                                        self.showDate(self.el, $(this).data('jdate'), $(this).data('gdate'), !0);
                                     else
-                                        self.showDate(self.el, $(this).data('date').jDate, $(this).data('date').gDate, !1);
+                                        self.showDate(self.el, $(this).data('jdate'), $(this).data('gdate'), !1);
 
                                     self.hide();
                                 });
@@ -433,7 +434,8 @@
 
                 if (self.options.selectableMonths._indexOf(self.persianDate.month) > -1) {
                     _goToday = $('<a class="goToday" />');
-                    _goToday.data("date", { jDate: self.now().toString("YYYY/MM/DD/DW"), gDate: self.jDateFunctions.getGDate(self.now()) });
+                    _goToday.attr("data-jdate",  self.now().toString("YYYY/MM/DD/DW"));
+                    _goToday.attr("data-gdate",  self.jDateFunctions.getGDate(self.now()));
                     _goToday
                             .attr("href", "javascript:;")
                             .html('هم اکنون');
@@ -441,7 +443,7 @@
                         _goToday.bind("click", function () {
                             self.persianDate = self.now();
                             
-                            self.showDate(self.el, $(this).data('date').jDate, $(this).data('date').gDate, self.options.showGregorianDate);
+                            self.showDate(self.el, $(this).data('jdate'), $(this).data('gdate'), self.options.showGregorianDate);
                            
                             self.calendar.find(".day").removeClass("selday");
                             self.render();
@@ -449,12 +451,14 @@
                             self.hide();
                         });
                     _goToday.appendTo(_footer);
-                }
+                    
+                }                                    
+
             },
             showDate: function (el, jDate, gDate, showGdate) {
                 var self = this;
                 jDate = self.persianDate.parse(jDate).toString(self.options.formatDate);
-                gDate = gDate._toString(self.options.formatDate)
+                gDate =new Date(gDate)._toString(self.options.formatDate);
                 if (el.is('input:text')) {
                     if(showGdate)
                         el.val(gDate);
@@ -496,10 +500,12 @@
 
         // format Date with _toString()
         Date.prototype._toString = function (formatDate) {
+
             months = ["Januray", "February", "March", "April", "May", "June", "Julay", "August", "September", "October", "November", "December"];
             dows = ["Sun", "Mon", "Tue", "Wed", "Tur", "Fri", "Sat"];
             if (formatDate === undefined || formatDate == "default")
-                return this;
+                return this.toLocaleDateString();
+                    
             return (
                     formatDate
                     .replace("YYYY", this.getFullYear())
@@ -507,16 +513,16 @@
                     .replace("DD", this.getDate())
                     .replace("0M", (this.getMonth() + 1) > 9 ? this.getMonth() + 1 : '0' + (this.getMonth() + 1))
                     .replace("0D", this.getDate() > 9 ? this.getDate() : '0' + this.getDate())
-                    .replace("hh", this.getHours())
-                    .replace("mm", this.getMinutes())
-                    .replace("ss", this.getSeconds())
-                    .replace("ms", this.getMilliseconds())
+                    .replace("hh", this.getHours() == 0 ? new Date().getHours() : this.getHours() )
+                    .replace("mm", this.getMinutes() == 0 ? new Date().getMinutes() : this.getMinutes())
+                    .replace("ss", this.getSeconds() == 0 ? new Date().getSeconds() : this.getSeconds())
+                    .replace("ms", this.getMilliseconds() == 0 ? new Date().getMilliseconds() : this.getMilliseconds())
                     .replace("tm", (this.getHours() >= 12 && this.getMinutes() > 0) ? "PM" : "AM")
                     .replace("NM", months[this.getMonth()])
                     .replace("DW", this.getDay())
                     .replace("ND", dows[this.getDay()])
                     )
-        };
+        };        
         //    _indexOf() for arrays
         Array.prototype._indexOf = function (value) {
             return $.inArray(value, this);
