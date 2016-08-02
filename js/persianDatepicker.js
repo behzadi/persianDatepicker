@@ -138,10 +138,10 @@
 
                 if (self.options.selectedDate != undefined) {
                     jd = self.jDateFunctions.getJulianDayFromPersian(self.persianDate.parse(self.options.selectedDate));
-                    self.showDate(el, self.persianDate.parse(self.options.selectedDate).toString("YYYY/MM/DD/" + self.jDateFunctions.getWeekday(jd)), self.now().gDate, options.showGregorianDate);
+                    self.showDate(el, self.persianDate.parse(self.options.selectedDate).toString("YYYY/MM/DD"), self.now().gDate, options.showGregorianDate);
                 } else {
                     jd = self.jDateFunctions.getJulianDayFromPersian(self.now());
-                    self.showDate(el, self.now().toString("YYYY/MM/DD/" + self.jDateFunctions.getWeekday(jd)), self.now().gDate, options.showGregorianDate);
+                    self.showDate(el, self.now().toString("YYYY/MM/DD"), self.now().gDate, options.showGregorianDate);
                 }
             }            
 
@@ -405,7 +405,7 @@
                                 _selday = 'selday';
                             _fri = col == 6 ? 'friday' : '';
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + ' ' + _disday + '" ' + self.cellStyle + ' />');
-                            _cell.attr("data-jdate", _dt.toString("YYYY/MM/DD/DW"));
+                            _cell.attr("data-jdate", _dt.toString("YYYY/MM/DD"));
                             _cell.attr("data-gdate", self.jDateFunctions.getGDate(_dt)._toString("YYYY/MM/DD"));
                             _cell.html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(cellIndex - _start + 1) : cellIndex - _start + 1);
 
@@ -434,7 +434,7 @@
 
                 if (self.options.selectableMonths._indexOf(self.persianDate.month) > -1) {
                     _goToday = $('<a class="goToday" />');
-                    _goToday.attr("data-jdate",  self.now().toString("YYYY/MM/DD/DW"));
+                    _goToday.attr("data-jdate",  self.now().toString("YYYY/MM/DD"));
                     _goToday.attr("data-gdate",  self.jDateFunctions.getGDate(self.now()));
                     _goToday
                             .attr("href", "javascript:;")
