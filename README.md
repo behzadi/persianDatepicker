@@ -39,7 +39,7 @@ persianDatepicker is A lightweight jQuery plugin that select persian(jalali) dat
 ##Options
 To customize persian datepicker, simply pass in an options object: (defaults shown)
 ```javascript
-$("#input1").persianDatePicker({
+$("#input1").persianDatepicker({
      months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
         dowTitle: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
         shortDowTitle: ["ش", "ی", "د", "س", "چ", "پ", "ج"],
