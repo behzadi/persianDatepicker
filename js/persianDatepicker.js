@@ -196,8 +196,7 @@
                 this.onresize();
             },
             hide: function () {
-                this.options.onHide(this.calendar);
-                //this.calendar.hide();
+                this.options.onHide(this.calendar);                
 
                 if (this.options && !this.options.alwaysShow) {
                     this.calendar.hide();
@@ -408,7 +407,7 @@
                                 _selday = 'selday';
                             _fri = col == 6 ? 'friday' : '';
                             _cell = $('<div class="day cell ' + _fri + ' ' + _today + ' ' + _selday + ' ' + _disday + '" ' + self.cellStyle + ' />');
-                            _cell.attr("data-jdate", _dt.toString("YYYY/MM/DD/DW"));
+                            _cell.attr("data-jdate", _dt.toString("YYYY/MM/DD"));
                             _cell.attr("data-gdate", self.jDateFunctions.getGDate(_dt)._toString("YYYY/MM/DD"));
                             _cell.html(self.options.persianNumbers ? self.jDateFunctions.toPersianNums(cellIndex - _start + 1) : cellIndex - _start + 1);
 
@@ -473,12 +472,10 @@
                     else
                         el.html(jDate);
                 }
-                if (showGdate)
-                    el.attr('data-jDate', jDate);
-                else
-                    el.attr('data-gDate', gDate);
 
-                //this.jDateFunctions.getGDate(this.persianDate)._toString("YYYY/MM/DD/DW")
+                el.attr('data-jDate', jDate);
+                el.attr('data-gDate', gDate);
+
                 this.options.onSelect();
             },
             getDate: function (jd, d) {
@@ -570,7 +567,7 @@ var persianDate = (function () {
                     if (this.month > 1 && this.date > lastDayOfMonth) {
                         this.date = 1;
                         this.addMonth(1);
-                    }else if (this.date == 0) {
+                    } else if (this.date == 0) {
                         this.addMonth(-1);
                         this.date = lastDayOfMonth;
                     }
