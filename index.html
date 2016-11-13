@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -121,7 +122,13 @@
                     <span class="menu--label">Convert Jalali to GregorianDate</span>
                 </a>
             </li>
-            
+
+            <li class="menu--item">
+                <a href="#workWithPersianDate" class="menu--link" title="workWithPersianDate">
+                    <i class="menu--icon  fa fa-fw fa-calendar-o"></i>
+                    <span class="menu--label">PersianDate Functions</span>
+                </a>
+            </li>
 
             <li class="menu--item">
                 <a href="https://github.com/behzadi/persianDatepicker" class="menu--link" title="download">
@@ -310,7 +317,6 @@
             alert($("#pdp-data-jdate").data("gdate"));
         }
     });
-
     $("#pdp-data-gdate").persianDatepicker({
         showGregorianDate: true,
         onSelect: function () {
@@ -325,7 +331,7 @@
             <h2> - Gregorian Date</h2>
             <label>show jalali, select gregorian date !</label>
             <input type="text" id="pdpGregorian" placeholder="select Date" />
-            
+
 
             <pre class="language-javascript"><code class="language-javascript">   
     $("#pdpGregorian").persianDatepicker({ showGregorianDate: true });  
@@ -340,7 +346,7 @@
             <input type="text" id="pdpjdf-2" placeholder="selectedDate" />
             <label>jalali date</label>
             <input type="text" id="pdpjdf-3" placeholder="selectedDate" />
-            
+
             <pre class="language-javascript"><code class="language-javascript">
     var jdf = new jDateFunctions();
     var pd = new persianDate();
@@ -434,6 +440,20 @@
         </section>
 
 
+        <section id="workWithPersianDate">
+            <h2> - Work With Persian Date Functions</h2>
+            <label>selected date is tomarrow(range of date is next 4 days)</label>
+            <input type="text" id="pdpStartDateTomarrow" placeholder="startDate Tomarrow" />
+
+            <pre class="language-javascript"><code class="  language-javascript">
+    $("#pdpStartDateTommarrow").persianDatepicker({
+        startDate: p.now().addDay(1).toString("YYYY/MM/DD"), 
+        endDate: p.now().addDay(4).toString("YYYY/MM/DD") 
+    });    
+</code></pre>
+        </section>
+
+        <br /><br /><br /><br /><br /><br />
     </div>
     <script src="js/jquery-1.10.1.min.js"></script>
     <script src="js/persianDatepicker.js"></script>
@@ -511,7 +531,7 @@
                     pd.year = parseInt($("#year").val());
                     pd.month = parseInt($("#month").val());
                     pd.date = parseInt($("#day").val());
-                                       
+
                     var jdf = new jDateFunctions();
                     $("#converted").html("Gregorian :  " + jdf.getGDate(pd)._toString("YYYY/MM/DD") + "     [" + jdf.getGDate(pd) + "]<br />Julian:  " + jdf.getJulianDayFromPersian(pd));
 
@@ -519,6 +539,12 @@
                     $("#converted").html("Enter the year correctly!");
                 }
             }
+
+
+            //startDate is tomarrow
+            var p = new persianDate();
+            $("#pdpStartDateTomarrow").persianDatepicker({ startDate: p.now().addDay(1).toString("YYYY/MM/DD"), endDate: p.now().addDay(4).toString("YYYY/MM/DD") });
+
 
         });
     </script>
