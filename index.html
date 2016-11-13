@@ -100,20 +100,28 @@
                         <span class="menu--label">Range of date</span>
                     </a>
                 </li>
-                
+
                 <li class="menu--item">
                     <a href="#selectedDate" class="menu--link" title="selectedDate & selectedBefore">
                         <i class="menu--icon  fa fa-fw fa-calendar-o"></i>
                         <span class="menu--label">Select date</span>
                     </a>
                 </li>
-                
-                 <li class="menu--item">
+
+                <li class="menu--item">
+                    <a href="#workWithPersianDate" class="menu--link" title="workWithPersianDate">
+                        <i class="menu--icon  fa fa-fw fa-calendar-o"></i>
+                        <span class="menu--label">PersianDate Functions</span>
+                    </a>
+                </li>
+
+                <li class="menu--item">
                     <a href="https://github.com/behzadi/persianDatepicker" class="menu--link" title="download">
                         <i class="menu--icon  fa fa-fw fa-download"></i>
                         <span class="menu--label">Download</span>
                     </a>
-                </li>
+                </li>                
+                
 
             </ul>
 
@@ -273,16 +281,16 @@
     });
 </code></pre> 
             </section>
-            
-            
+
+
             <section id="selectedDate">
                 <h2> - selectedDate & selectedBefore</h2>
                 <label>selected date is 1395/5/5</label>
-                <input type="text" id="pdpSelectedDate" placeholder="selectedDate" />                
+                <input type="text" id="pdpSelectedDate" placeholder="selectedDate"/>
                 <label>select today date before</label>
-                <input type="text" id="pdpSelectedBefore" />                
+                <input type="text" id="pdpSelectedBefore"/>
                 <label>selectedDate & selectedBefore</label>
-                <input type="text" id="pdpSelectedBoth"  />
+                <input type="text" id="pdpSelectedBoth"/>
                 <pre class="language-javascript"><code class="  language-javascript">
     $("#pdpSelectedDate").persianDatepicker({
         selectedDate:"1395/5/5"
@@ -298,10 +306,24 @@
     });
 </code></pre> 
             </section>
-            
-            
-        </div>
 
+
+
+            <section id="workWithPersianDate">
+                <h2> - Work With Persian Date Functions</h2>
+                <label>selected date is tomarrow(range of date is next 4 days)</label>
+                <input type="text" id="pdpStartDateTomarrow" placeholder="startDate Tomarrow" />
+                
+                <pre class="language-javascript"><code class="  language-javascript">
+    $("#pdpStartDateTommarrow").persianDatepicker({
+        startDate: p.now().addDay(1).toString("YYYY/MM/DD"), 
+        endDate: p.now().addDay(4).toString("YYYY/MM/DD") 
+    });    
+</code></pre>
+            </section>
+
+        </div>
+        <br/><br /><br /><br />
         <script src="js/jquery-1.10.1.min.js" ></script>                
         <script src="js/persianDatepicker.js"></script>
         <script>
@@ -333,7 +355,12 @@
                 //selectedBefor & selectedDate
                 $("#pdpSelectedDate").persianDatepicker({selectedDate:"1395/5/5"});
                 $("#pdpSelectedBefore").persianDatepicker({selectedBefore: !0});               
-                $("#pdpSelectedBoth").persianDatepicker({selectedBefore: !0, selectedDate:"1395/5/5"});               
+                $("#pdpSelectedBoth").persianDatepicker({ selectedBefore: !0, selectedDate: "1395/5/5" });
+
+                //startDate is tomarrow
+                var p = new persianDate();
+                $("#pdpStartDateTomarrow").persianDatepicker({ startDate: p.now().addDay(1).toString("YYYY/MM/DD"), endDate: p.now().addDay(4).toString("YYYY/MM/DD") });
+                
 
             });
         </script>
