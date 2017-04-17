@@ -1,6 +1,6 @@
-##[Demos and information](http://behzadi.github.io/persianDatepicker/ "http://behzadi.github.io/persianDatepicker/")
+## [Demos and information](http://behzadi.github.io/persianDatepicker/ "http://behzadi.github.io/persianDatepicker/")
 
-##About
+## About
 
 persianDatepicker is A lightweight jQuery plugin that select persian(jalali) date. 
   
@@ -14,7 +14,7 @@ persianDatepicker is A lightweight jQuery plugin that select persian(jalali) dat
 - **Selectable months and years:**  [1, 3, 4, 12]
 - **Set startDate and endDate(new)** startDate: 1393/10/19, endDate: 1393/12/21
 
-##Usage
+## Usage
 1- include jQuery & persianDatepicker.js & persianDatepicker.css
 ```html
 <link type="text/css" rel="stylesheet" href="css/persianDatepicker.css" />
@@ -36,7 +36,7 @@ persianDatepicker is A lightweight jQuery plugin that select persian(jalali) dat
 </script>
 ```
 
-##Options
+## Options
 To customize persian datepicker, simply pass in an options object: (defaults shown)
 ```javascript
 $("#input1").persianDatePicker({
@@ -70,7 +70,7 @@ $("#input1").persianDatePicker({
 });
 ```
 
-##Credit
+## Credit
 Created by [@kharabati](http://twitter.com/kharabati "@kharabati"))
 
 use, share , fork , enjoy! , ...
