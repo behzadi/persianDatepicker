@@ -16,7 +16,7 @@
         {
             "name": "Mohammad hasan Behzadi",
             "email": "mohammadhasan.behzadi@gmail.com",
-            "url": "http://mbehzadi.com"
+            "url": "http://behzadi.github.io"
         }
     ],
     "licenses": [
@@ -26,9 +26,9 @@
         }
     ],
     "bugs": "https://github.com/behzadi/persianDatepicker/issues",
-    "homepage": "http://mbehzadi.com/persianDatepicker",
-    "docs": "http://mbehzadi.com/persianDatepicker",
-    "demo": "http://mbehzadi.com/persianDatepicker",
+    "homepage": "http://behzadi.github.io/persianDatepicker/",
+    "docs": "http://behzadi.github.io/persianDatepicker/",
+    "demo": "http://behzadi.github.io/persianDatepicker/",
     "download": "https://github.com/behzadi/persianDatepicker/archive/master.zip",
     "dependencies": {
         "jquery": ">=1.4"
