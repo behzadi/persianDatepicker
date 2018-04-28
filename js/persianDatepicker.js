@@ -352,10 +352,10 @@
 
                 if (self.options.startDate == null || (self.persianDate.parse(self.options.startDate).year < self.persianDate.year || self.persianDate.parse(self.options.startDate).month < self.persianDate.month)) {
                     _prev.bind("click", function () {
-                        prevMonth = self.persianDate.month - 1;
-                        for (; self.options.selectableMonths._indexOf(prevMonth) == -1 && prevMonth > 0; prevMonth--)
-                            ;
-                        self.persianDate.addMonth(-(self.persianDate.month - prevMonth));
+                        //prevMonth = self.persianDate.month - 1;
+                        //for (; self.options.selectableMonths._indexOf(prevMonth) == -1 && prevMonth > 1; prevMonth--);
+                        //self.persianDate.addMonth(-(self.persianDate.month - prevMonth));                        
+                        self.persianDate.addMonth(-1);
                         self.render();
                     });
                     _prev.removeClass("disabled");
@@ -380,7 +380,7 @@
                 _days = $('<div class="days" />');
                 _days.appendTo(this.calendar);
                 jd = self.persianDate;
-                //jd.date = 1;
+                jd.date = 1;
                 _start = self.jDateFunctions.getWeekday(self.jDateFunctions.getJulianDayFromPersian(jd));
                 _end = self.jDateFunctions.getLastDayOfPersianMonth(self.persianDate);
                 for (var row = 0, cellIndex = 0; row < 5 + 1; row++) {
