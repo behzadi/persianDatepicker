@@ -3,10 +3,10 @@
  * http://github.com/behzadi/persianDatepicker/
  *
  * Copyright (c) 2013 Mohammad hasan Behzadi  All rights reserved.
- * 
+ *
  * Released under the MIT license.
  *
- * jalali Date Functions from NASA.gov 
+ * jalali Date Functions from NASA.gov
  *
  * Date: Tue Jan 1 2013
  */
@@ -44,7 +44,7 @@
                 selectableMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 cellWidth: 25, // by px
                 cellHeight: 20, // by px
-                fontSize: 13, // by px                
+                fontSize: 13, // by px
                 isRTL: !1,
                 closeOnBlur: !0,
                 calendarPosition: {
@@ -259,7 +259,7 @@
                         _yearSelect.scrollTop(70);
                     });
 
-                //----               
+                //----
                 _startDate = self.options.startDate != null ? self.persianDate.parse(self.options.startDate) : self.persianDate.parse("1/1/1");
                 _endDate = self.options.endDate != null ? self.persianDate.parse(self.options.endDate) : self.persianDate.parse("9999/1/1");
 
@@ -300,7 +300,7 @@
                 };
                 getSelectableYears();
 
-                // selectable months                
+                // selectable months
                 for (i = 1; i <= 12; i++) {
                     var m = self.options.months[i - 1];
                     var o = (self.options.selectableMonths._indexOf(i) == -1 || (_startDate.year == self.persianDate.year && _startDate.month > i) || (_endDate.year == self.persianDate.year && i > _endDate.month)) ? $('<li class="disableMonth" ' + self.selectMonthLiStyle + ' />').html(m) : $('<li ' + self.selectMonthLiStyle + ' />').html(m);
@@ -354,7 +354,7 @@
                     _prev.bind("click", function () {
                         //prevMonth = self.persianDate.month - 1;
                         //for (; self.options.selectableMonths._indexOf(prevMonth) == -1 && prevMonth > 1; prevMonth--);
-                        //self.persianDate.addMonth(-(self.persianDate.month - prevMonth));                        
+                        //self.persianDate.addMonth(-(self.persianDate.month - prevMonth));
                         self.persianDate.addMonth(-1);
                         self.render();
                     });
@@ -638,7 +638,7 @@ var persianDate = (function () {
     return persianDate;
 })();
 
-//  jalali Date Functions from NASA.gov 
+//  jalali Date Functions from NASA.gov
 var jDateFunctions = (function () {
     function jDateFunctions() {
     }
@@ -844,7 +844,7 @@ var jDateFunctions = (function () {
             }
             return 29;
         },
-        isLeapYear(year) {
+        isLeapYear: function(year) {
             ary = array(1, 5, 9, 13, 17, 22, 26, 30);
             b = year % 33;
             if (in_array($b, $ary))
