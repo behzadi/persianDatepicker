@@ -193,7 +193,7 @@
         selectableMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         cellWidth: 25, // by px
         cellHeight: 20, // by px
-        fontSize: 13, // by px                
+        fontSize: 13, // by px
         isRTL: !1,
         calendarPosition: {
             x: 0,
@@ -210,15 +210,15 @@
             <input type="text" placeholder="small" id="pdpSmall" />&nbsp;
             <input type="text" placeholder="big" id="pdpBig" />
             <pre class="language-javascript"><code class=" language-javascript">
-    $("#pdpBig").persianDatepicker({        
-        cellWidth: 78, 
+    $("#pdpBig").persianDatepicker({
+        cellWidth: 78,
         cellHeight: 60,
-        fontSize: 18, 
+        fontSize: 18,
     });
-    $("#pdpSmall").persianDatepicker({        
-        cellWidth: 14, 
+    $("#pdpSmall").persianDatepicker({
+        cellWidth: 14,
         cellHeight: 12,
-        fontSize: 8, 
+        fontSize: 8,
     });
 </code></pre>
         </section>
@@ -240,9 +240,9 @@
         formatDate: "YYYY-0M-0D"
     });
     $("#pdpF3").persianDatepicker({
-        formatDate: "YYYY-NM-DW|ND", 
+        formatDate: "YYYY-NM-DW|ND",
         isRTL:!0  //  isRTL:!0 => because of persian words direction
-    });  
+    });
     YYYY  =>   year             : 1394  -  ...
     MM    =>   month            : 1     -  12
     DD    =>   day              : 1     -  30|31
@@ -254,7 +254,7 @@
     ms    =>   milisecond       : 0     -  3 digit random time of cpu like 359
     NM    =>   name of month    : اسفند-فروردین
     DW    =>   day of week      : 0     -  6
-    ND    =>   name of day      : جمعه-شنبه     
+    ND    =>   name of day      : جمعه-شنبه
 </code></pre>
         </section>
         <section id="startDate">
@@ -267,15 +267,15 @@
             <input type="text" id="pdpEndToday" placeholder="endDate is today" />
             <pre class="language-javascript"><code class=" language-javascript">
     $("#pdpStartEnd").persianDatepicker({
-        startDate: "1394/11/12", 
+        startDate: "1394/11/12",
         endDate:"1395/5/5"
     });
     $("#pdpStartToday").persianDatepicker({
-        startDate: "today", 
+        startDate: "today",
         endDate:"1395/5/5"
     });
     $("#pdpEndToday").persianDatepicker({
-        startDate: "1393/11/12", 
+        startDate: "1393/11/12",
         endDate:"today"
     });
 </code></pre>
@@ -298,7 +298,7 @@
         selectedBefore: !0
     });
     $("#pdpSelectedBoth").persianDatepicker({
-        selectedBefore: !0, 
+        selectedBefore: !0,
         selectedDate:"1395/5/5"
     });
 </code></pre>
@@ -307,20 +307,20 @@
 
         <section id="dataAttr">
             <h2> - data-jdate & data-gdate attributes</h2>
-            <label>so we have a data attr with jdate & gdate names..</label>
+            <label>so we have a attr data attr with jdate & gdate names..</label>
             <input type="text" id="pdp-data-jdate" placeholder="select Date" />
             <input type="text" id="pdp-data-gdate" placeholder="select Date" />
 
-            <pre class="language-javascript"><code class="language-javascript">   
+            <pre class="language-javascript"><code class="language-javascript">
     $("#pdp-data-jdate").persianDatepicker({
         onSelect: function () {
-            alert($("#pdp-data-jdate").data("gdate"));
+            alert($("#pdp-data-jdate").attr("data-gdate"));
         }
     });
     $("#pdp-data-gdate").persianDatepicker({
         showGregorianDate: true,
         onSelect: function () {
-            alert($("#pdp-data-gdate").data("jdate"));
+            alert($("#pdp-data-gdate").attr("data-jdate"));
         }
     });
 </code></pre>
@@ -333,8 +333,8 @@
             <input type="text" id="pdpGregorian" placeholder="select Date" />
 
 
-            <pre class="language-javascript"><code class="language-javascript">   
-    $("#pdpGregorian").persianDatepicker({ showGregorianDate: true });  
+            <pre class="language-javascript"><code class="language-javascript">
+    $("#pdpGregorian").persianDatepicker({ showGregorianDate: true });
 </code></pre>
         </section>
 
@@ -429,7 +429,7 @@
             pd.year = parseInt($("#year").val());
             pd.month = parseInt($("#month").val());
             pd.date = parseInt($("#day").val());
-                                       
+
             var jdf = new jDateFunctions();
             $("#converted").html("Gregorian :  " + jdf.getGDate(pd)._toString("YYYY/MM/DD") + "     [" + jdf.getGDate(pd) + "]<br />Julian:  " + jdf.getJulianDayFromPersian(pd));
         } catch (e) {
@@ -448,9 +448,9 @@
             <pre class="language-javascript"><code class="  language-javascript">
     var p = new persianDate();
     $("#pdpStartDateTommarrow").persianDatepicker({
-        startDate: p.now().addDay(1).toString("YYYY/MM/DD"), 
-        endDate: p.now().addDay(4).toString("YYYY/MM/DD") 
-    });    
+        startDate: p.now().addDay(1).toString("YYYY/MM/DD"),
+        endDate: p.now().addDay(4).toString("YYYY/MM/DD")
+    });
 </code></pre>
         </section>
 
@@ -492,13 +492,13 @@
             //jdate & gdate attributes
             $("#pdp-data-jdate").persianDatepicker({
                 onSelect: function () {
-                    alert($("#pdp-data-jdate").data("gdate"));
+                    alert($("#pdp-data-jdate").attr("data-gdate"));
                 }
             });
             $("#pdp-data-gdate").persianDatepicker({
                 showGregorianDate: true,
                 onSelect: function () {
-                    alert($("#pdp-data-gdate").data("jdate"));
+                    alert($("#pdp-data-gdate").attr("data-jdate"));
                 }
             });
 
