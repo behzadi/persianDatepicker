@@ -844,7 +844,7 @@ var jDateFunctions = (function () {
             }
             return 29;
         },
-        isLeapYear(year) {
+        isLeapYear: function (year) {
             ary = array(1, 5, 9, 13, 17, 22, 26, 30);
             b = year % 33;
             if (in_array($b, $ary))
