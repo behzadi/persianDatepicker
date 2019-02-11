@@ -66,7 +66,8 @@ $("#input1").persianDatepicker({
         },
         onShow: function () { },
         onHide: function () { },
-        onSelect: function () { }
+        onSelect: function () { },
+        onRender: function () { }
 });
 ```
 
