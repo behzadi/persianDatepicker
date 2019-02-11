@@ -108,21 +108,7 @@
                     <span class="menu--label">Gregorian Date</span>
                 </a>
             </li>
-
-            <li class="menu--item">
-                <a href="#julianDay" class="menu--link" title="Julian Day">
-                    <i class="menu--icon  fa fa-fw fa-calendar-o"></i>
-                    <span class="menu--label">Julian Day</span>
-                </a>
-            </li>
-
-            <li class="menu--item">
-                <a href="#convertDates" class="menu--link" title="Convert Jalali to GregorianDate">
-                    <i class="menu--icon  fa fa-fw fa-calendar-o"></i>
-                    <span class="menu--label">Convert Jalali to GregorianDate</span>
-                </a>
-            </li>
-
+          
             <li class="menu--item">
                 <a href="#workWithPersianDate" class="menu--link" title="workWithPersianDate">
                     <i class="menu--icon  fa fa-fw fa-calendar-o"></i>
@@ -193,15 +179,16 @@
         selectableMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         cellWidth: 25, // by px
         cellHeight: 20, // by px
-        fontSize: 13, // by px                
+        fontSize: 13, // by px
         isRTL: !1,
         calendarPosition: {
             x: 0,
             y: 0,
         },
-        onShow: function () { },
-        onHide: function () { },
-        onSelect: function () { }
+        onShow: function () {},
+        onHide: function () {},
+        onSelect: function () {},
+        onRender: function () {}
     });
 </code></pre>
         </section>
@@ -210,15 +197,15 @@
             <input type="text" placeholder="small" id="pdpSmall" />&nbsp;
             <input type="text" placeholder="big" id="pdpBig" />
             <pre class="language-javascript"><code class=" language-javascript">
-    $("#pdpBig").persianDatepicker({        
-        cellWidth: 78, 
+    $("#pdpBig").persianDatepicker({
+        cellWidth: 78,
         cellHeight: 60,
-        fontSize: 18, 
+        fontSize: 18,
     });
-    $("#pdpSmall").persianDatepicker({        
-        cellWidth: 14, 
+    $("#pdpSmall").persianDatepicker({
+        cellWidth: 14,
         cellHeight: 12,
-        fontSize: 8, 
+        fontSize: 8,
     });
 </code></pre>
         </section>
@@ -240,9 +227,9 @@
         formatDate: "YYYY-0M-0D"
     });
     $("#pdpF3").persianDatepicker({
-        formatDate: "YYYY-NM-DW|ND", 
+        formatDate: "YYYY-NM-DW|ND",
         isRTL:!0  //  isRTL:!0 => because of persian words direction
-    });  
+    });
     YYYY  =>   year             : 1394  -  ...
     MM    =>   month            : 1     -  12
     DD    =>   day              : 1     -  30|31
@@ -254,7 +241,7 @@
     ms    =>   milisecond       : 0     -  3 digit random time of cpu like 359
     NM    =>   name of month    : اسفند-فروردین
     DW    =>   day of week      : 0     -  6
-    ND    =>   name of day      : جمعه-شنبه     
+    ND    =>   name of day      : جمعه-شنبه
 </code></pre>
         </section>
         <section id="startDate">
@@ -267,15 +254,15 @@
             <input type="text" id="pdpEndToday" placeholder="endDate is today" />
             <pre class="language-javascript"><code class=" language-javascript">
     $("#pdpStartEnd").persianDatepicker({
-        startDate: "1394/11/12", 
+        startDate: "1394/11/12",
         endDate:"1395/5/5"
     });
     $("#pdpStartToday").persianDatepicker({
-        startDate: "today", 
+        startDate: "today",
         endDate:"1395/5/5"
     });
     $("#pdpEndToday").persianDatepicker({
-        startDate: "1393/11/12", 
+        startDate: "1393/11/12",
         endDate:"today"
     });
 </code></pre>
@@ -298,7 +285,7 @@
         selectedBefore: !0
     });
     $("#pdpSelectedBoth").persianDatepicker({
-        selectedBefore: !0, 
+        selectedBefore: !0,
         selectedDate:"1395/5/5"
     });
 </code></pre>
@@ -311,16 +298,16 @@
             <input type="text" id="pdp-data-jdate" placeholder="select Date" />
             <input type="text" id="pdp-data-gdate" placeholder="select Date" />
 
-            <pre class="language-javascript"><code class="language-javascript">   
+            <pre class="language-javascript"><code class="language-javascript">
     $("#pdp-data-jdate").persianDatepicker({
         onSelect: function () {
-            alert($("#pdp-data-jdate").data("gdate"));
+            alert($("#pdp-data-jdate").attr("data-gdate"));
         }
     });
     $("#pdp-data-gdate").persianDatepicker({
         showGregorianDate: true,
         onSelect: function () {
-            alert($("#pdp-data-gdate").data("jdate"));
+            alert($("#pdp-data-gdate").attr("data-jdate"));
         }
     });
 </code></pre>
@@ -333,109 +320,8 @@
             <input type="text" id="pdpGregorian" placeholder="select Date" />
 
 
-            <pre class="language-javascript"><code class="language-javascript">   
-    $("#pdpGregorian").persianDatepicker({ showGregorianDate: true });  
-</code></pre>
-        </section>
-
-        <section id="julianDay">
-            <h2> - Julian Day</h2>
-            <label>julian day</label>
-            <input type="text" id="pdpjdf-1" placeholder="selectedDate" />
-            <label>last day of motnth</label>
-            <input type="text" id="pdpjdf-2" placeholder="selectedDate" />
-            <label>jalali date</label>
-            <input type="text" id="pdpjdf-3" placeholder="selectedDate" />
-
             <pre class="language-javascript"><code class="language-javascript">
-    var jdf = new jDateFunctions();
-    var pd = new persianDate();
-    $("#pdpjdf-1").persianDatepicker({
-        onSelect: function () {
-            $("#pdpjdf-1").val(jdf.getJulianDayFromPersian(pd.parse($("#pdpjdf-1").val())));
-            $("#pdpjdf-2").val(jdf.getLastDayOfPersianMonth(pd.parse($("#pdpjdf-1").val())));
-            $("#pdpjdf-3").val(jdf.getPCalendarDate($("#pdpjdf-1").val()));
-        }
-    });
-</code></pre>
-        </section>
-
-
-        <section id="convertDates">
-            <h2> - Convert Jalali(shamsi) date to Gregorian(miladi) date</h2>
-            <label>year</label>
-            <input type="text" id="year" style="width:50px" />
-            <label>month</label>
-            <select id="month">
-                <option value="1">فروردین-farvardin</option>
-                <option value="2">اردیبهشت-ordibehesht</option>
-                <option value="3">خرداد-khordad</option>
-                <option value="4">تیر-tir</option>
-                <option value="5">مرداد-mordad</option>
-                <option value="6">شهریور-shahrivar</option>
-                <option value="7">مهر-mehr</option>
-                <option value="8">آبان-aban</option>
-                <option value="9">آذر-azar</option>
-                <option value="10">دی-dey</option>
-                <option value="11">بهمن-bahman</option>
-                <option value="12">اسفند-esfand</option>
-            </select>
-            <label>day</label>
-            <select id="day">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option id="day-31" value="31">31</option>
-            </select>
-            &nbsp;&nbsp;
-            <h3 style="color:dodgerblue" id="converted">result</h3>
-
-            <pre class="language-javascript"><code class="language-javascript">
-    $("#year, #month, #day").on("change", function () {
-        $("#month").val() > 6 ? $("#day-31").hide() : $("#day-31").show();;
-        showConverted();
-    });
-    $("#year").keyup(showConverted);
-    function showConverted() {
-        try{
-            var pd = new persianDate();
-            pd.year = parseInt($("#year").val());
-            pd.month = parseInt($("#month").val());
-            pd.date = parseInt($("#day").val());
-                                       
-            var jdf = new jDateFunctions();
-            $("#converted").html("Gregorian :  " + jdf.getGDate(pd)._toString("YYYY/MM/DD") + "     [" + jdf.getGDate(pd) + "]<br />Julian:  " + jdf.getJulianDayFromPersian(pd));
-        } catch (e) {
-            $("#converted").html("Enter the year correctly!");
-        }
-    }
+    $("#pdpGregorian").persianDatepicker({ showGregorianDate: true });
 </code></pre>
         </section>
 
@@ -446,10 +332,11 @@
             <input type="text" id="pdpStartDateTomarrow" placeholder="startDate Tomarrow" />
 
             <pre class="language-javascript"><code class="  language-javascript">
+    var p = new persianDate();
     $("#pdpStartDateTommarrow").persianDatepicker({
-        startDate: p.now().addDay(1).toString("YYYY/MM/DD"), 
-        endDate: p.now().addDay(4).toString("YYYY/MM/DD") 
-    });    
+        startDate: p.now().addDay(1).toString("YYYY/MM/DD"),
+        endDate: p.now().addDay(4).toString("YYYY/MM/DD")
+    });
 </code></pre>
         </section>
 
@@ -480,24 +367,24 @@
 
             //startDate & endDate
             $("#pdpStartEnd").persianDatepicker({ startDate: "1394/11/12", endDate: "1395/5/5" });
-            $("#pdpStartToday").persianDatepicker({ startDate: "today", endDate: "1395/5/5" });
-            $("#pdpEndToday").persianDatepicker({ startDate: "1393/11/12", endDate: "today" });
+            $("#pdpStartToday").persianDatepicker({ startDate: "today", endDate: "1410/11/5" });
+            $("#pdpEndToday").persianDatepicker({ startDate: "1397/11/12", endDate: "today" });
 
             //selectedBefor & selectedDate
-            $("#pdpSelectedDate").persianDatepicker({ selectedDate: "1395/5/5" });
+            $("#pdpSelectedDate").persianDatepicker({ selectedDate: "1404/1/1", alwaysShow: !0 });
             $("#pdpSelectedBefore").persianDatepicker({ selectedBefore: !0 });
             $("#pdpSelectedBoth").persianDatepicker({ selectedBefore: !0, selectedDate: "1395/5/5" });
 
             //jdate & gdate attributes
             $("#pdp-data-jdate").persianDatepicker({
                 onSelect: function () {
-                    alert($("#pdp-data-jdate").data("gdate"));
+                    alert($("#pdp-data-jdate").attr("data-gdate"));
                 }
             });
             $("#pdp-data-gdate").persianDatepicker({
                 showGregorianDate: true,
                 onSelect: function () {
-                    alert($("#pdp-data-gdate").data("jdate"));
+                    alert($("#pdp-data-gdate").attr("data-jdate"));
                 }
             });
 
@@ -506,39 +393,39 @@
             $("#pdpGregorian").persianDatepicker({ showGregorianDate: true });
 
             // jDateFuctions
-            var jdf = new jDateFunctions();
-            var pd = new persianDate();
-            $("#pdpjdf-1").persianDatepicker({
-                onSelect: function () {
-                    $("#pdpjdf-1").val(jdf.getJulianDayFromPersian(pd.parse($("#pdpjdf-1").val())));
-                    $("#pdpjdf-2").val(jdf.getLastDayOfPersianMonth(pd.parse($("#pdpjdf-1").val())));
-                    $("#pdpjdf-3").val(jdf.getPCalendarDate($("#pdpjdf-1").val()));
-                }
-            });
+            // var jdf = new jDateFunctions();
+            // var pd = new persianDate();
+            // $("#pdpjdf-1").persianDatepicker({
+            //     onSelect: function () {
+            //         $("#pdpjdf-1").val(jdf.getJulianDayFromPersian(pd.parse($("#pdpjdf-1").val())));
+            //         $("#pdpjdf-2").val(jdf.getLastDayOfPersianMonth(pd.parse($("#pdpjdf-1").val())));
+            //         $("#pdpjdf-3").val(jdf.getPCalendarDate($("#pdpjdf-1").val()));
+            //     }
+            // });
 
 
-            //convert jalali date to miladi
-            $("#year, #month, #day").on("change", function () {
-                $("#month").val() > 6 ? $("#day-31").hide() : $("#day-31").show();;
-                showConverted();
-            });
+            // //convert jalali date to miladi
+            // $("#year, #month, #day").on("change", function () {
+            //     $("#month").val() > 6 ? $("#day-31").hide() : $("#day-31").show();;
+            //     showConverted();
+            // });
 
-            $("#year").keyup(showConverted);
-
-            function showConverted() {
-                try{
-                    var pd = new persianDate();
-                    pd.year = parseInt($("#year").val());
-                    pd.month = parseInt($("#month").val());
-                    pd.date = parseInt($("#day").val());
-
-                    var jdf = new jDateFunctions();
-                    $("#converted").html("Gregorian :  " + jdf.getGDate(pd)._toString("YYYY/MM/DD") + "     [" + jdf.getGDate(pd) + "]<br />Julian:  " + jdf.getJulianDayFromPersian(pd));
-
-                } catch (e) {
-                    $("#converted").html("Enter the year correctly!");
-                }
-            }
+            // $("#year").keyup(showConverted);
+            //
+            // function showConverted() {
+            //     try{
+            //         var pd = new persianDate();
+            //         pd.year = parseInt($("#year").val());
+            //         pd.month = parseInt($("#month").val());
+            //         pd.date = parseInt($("#day").val());
+            //
+            //         var jdf = new jDateFunctions();
+            //         $("#converted").html("Gregorian :  " + jdf.getGDate(pd)._toString("YYYY/MM/DD") + "     [" + jdf.getGDate(pd) + "]<br />Julian:  " + jdf.getJulianDayFromPersian(pd));
+            //
+            //     } catch (e) {
+            //         $("#converted").html("Enter the year correctly!");
+            //     }
+            // }
 
 
             //startDate is tomarrow
