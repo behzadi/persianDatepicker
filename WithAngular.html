@@ -5,13 +5,13 @@
 <link type="text/css" rel="stylesheet" href="css/persianDatepicker-default.css" />
 <script src="js/angular.min.js"></script>
 <script src="js/jquery-1.10.1.min.js"></script>
-<script src="js/persianDatepicker.min.js"></script>
+<script src="https://rawgit.com/behzadi/persianDatepicker/master/js/jquery-1.10.1.min.js"></script>
 </head>
 <body>
 
 <h2>using persianDatepicker with angularjs</h2>
 
-<div ng-app="newsFrom" id="newsForm" ng-controller="myCtrl">		
+<div ng-app="newsFrom" id="newsForm" ng-controller="myCtrl">
 	<input type="text" placeholder="select date.." class="publish" />
 	<span style="background:#B0C5E2;">{{ date }}</span> <== $scope.date = $(".publish").val();
 </div>
@@ -20,19 +20,19 @@
 <script>
 
 var app = angular.module('newsFrom', []);
-app.controller('myCtrl', function($scope) {	
+app.controller('myCtrl', function($scope) {
 	$scope.date = "NOT SELECTED YET!";
 	$scope.setDateVal = function () {
 		$scope.date = $(".publish").val();
 		$scope.$apply();
 	};
-});	
+});
 
 $( ".publish" ).persianDatepicker({
-	cellWidth: 35, 
-	cellHeight: 30, 
-	onSelect: function(){		
-		angular.element($('#newsForm')).scope().setDateVal();				
+	cellWidth: 35,
+	cellHeight: 30,
+	onSelect: function(){
+		angular.element($('#newsForm')).scope().setDateVal();
 	}
 });
 
@@ -48,19 +48,19 @@ $( ".publish" ).persianDatepicker({
 
 &lt;script&gt;
 var app = angular.module('newsFrom', []);
-app.controller('myCtrl', function($scope) {	
+app.controller('myCtrl', function($scope) {
 	$scope.date = "NOT SELECTED YET!";
 	$scope.setDateVal = function () {
 		$scope.date = $(".publish").val();
 		$scope.$apply();
 	};
-});	
+});
 
 $( ".publish" ).persianDatepicker({
-	cellWidth: 35, 
-	cellHeight: 30, 
-	onSelect: function(){		
-		angular.element($('#newsForm')).scope().setDateVal();				
+	cellWidth: 35,
+	cellHeight: 30,
+	onSelect: function(){
+		angular.element($('#newsForm')).scope().setDateVal();
 	}
 });
 &lt;/script&gt;</code>
