@@ -212,8 +212,8 @@
 
         <section id="format">
             <h2> - Format selected date & time</h2>
-            <label>(date & time) YYYY/MM/DD hh:mm:ss:ms</label>
-            <input type="text" placeholder="YYYY/MM/DD hh:mm:ss:ms" id="pdpF1" /><br />
+            <label>(date & time) YYYY/MM/DD 0h:0m:0s:ms</label>
+            <input type="text" placeholder="YYYY/MM/DD 0h:0m:0s:ms" id="pdpF1" /><br />
             <label>(day & month with zero) YYYY-0M-0D</label>
             <input type="text" placeholder="YYYY-0M-0D" id="pdpF2" /><br />
             <label>(year & name of month & day of week & name of day) YYYY-NM-DW|ND</label>
@@ -361,7 +361,7 @@
             $("#pdpBig").persianDatepicker({ cellWidth: 78, cellHeight: 60, fontSize: 18 });
 
             //formatting
-            $("#pdpF1").persianDatepicker({ formatDate: "YYYY/MM/DD hh:mm:ss:ms" });
+            $("#pdpF1").persianDatepicker({ formatDate: "YYYY/MM/DD 0h:0m:0s:ms" });
             $("#pdpF2").persianDatepicker({ formatDate: "YYYY-0M-0D" });
             $("#pdpF3").persianDatepicker({ formatDate: "YYYY-NM-DW|ND", isRTL: !0 });
 
