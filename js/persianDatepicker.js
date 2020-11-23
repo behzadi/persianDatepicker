@@ -290,7 +290,7 @@
             if (v == self.persianDate.year) {
               o.addClass('selected');
             }
-            o.attr("value", v);
+            o.prop("value", v);
             o.bind("click", function () {
               self.persianDate.date = 1;
               self.persianDate.year = parseInt(v);
