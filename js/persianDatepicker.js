@@ -753,11 +753,11 @@ var jDateFunctions = (function () {
       }
       return 29;
     },
-    // to 1472
+    // 1244 to 1472
     isLeapYear: function (year) {
       var ary = year > 1342 ? [1, 5, 9, 13, 17, 22, 26, 30] : [1, 5, 9, 13, 17, 21, 26, 30];
       b = year % 33;
-      if (ary._indexOf(b))
+      if (ary._indexOf(b)>-1)
         return true;
       return false;
     }
