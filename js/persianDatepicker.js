@@ -781,6 +781,11 @@ var jDateFunctions = (function () {
 
 /* Start:-> Add By Mehdi Rizvandi :: Blazor Interop */
 function InitDatePicker(startDate, endDate) {
+    if (!startDate || !endDate) {
+        startDate = null;
+        endDate = null;
+    }
+
     $(".fcss-datepicker").persianDatepicker({ persianNumbers: true, formatDate: "YYYY/0M/0D", startDate: startDate, endDate: endDate, cellWidth: 40, cellHeight: 30, fontSize: 14 });
 };
 /* End:-> Add By Mehdi Rizvandi :: Blazor Interop */
