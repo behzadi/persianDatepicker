@@ -12,6 +12,8 @@
  * 
  * Last Update: Mon April 15 2019
  * 
+ * Changed By Mehdi Rizvandi, for Support Blazor
+ * Sun Jan 24 2021
  */
 ;
 (function ($) {
@@ -482,6 +484,17 @@
         el.attr('data-jDate', jDate);
         el.attr('data-gDate', gDate);
 
+        /* Start:-> Add By Mehdi Rizvandi :: Support Blazor Binding */
+        $('.pdp-el').each(function () {
+            if ($(this).attr('pdp-id') != undefined) {
+                if ($(this).attr('pdp-id') == $(el).attr('pdp-id')) {
+                    var event = new Event('change');
+                    this.dispatchEvent(event);
+                }
+            }
+        });
+        /* End:-> Add By Mehdi Rizvandi :: Support Blazor Binding */
+
         this.options.onSelect();
       },
       getDate: function (pd, d) {
@@ -765,3 +778,9 @@ var jDateFunctions = (function () {
 
   return jDateFunctions;
 })();
+
+/* Start:-> Add By Mehdi Rizvandi :: Blazor Interop */
+function InitDatePicker(startDate, endDate) {
+    $(".fcss-datepicker").persianDatepicker({ persianNumbers: true, formatDate: "YYYY/0M/0D", startDate: startDate, endDate: endDate, cellWidth: 40, cellHeight: 30, fontSize: 14 });
+};
+/* End:-> Add By Mehdi Rizvandi :: Blazor Interop */
