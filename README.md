@@ -41,7 +41,7 @@ Or in Blazor call the InitDatePicker
   {
       if (firstRender)
       {
-          await JSRuntime.InvokeVoidAsync("InitDatePicker", StartDate, endDate);
+          await JSRuntime.InvokeVoidAsync("InitDatePicker", StartDate, EndDate);
       }
 
       base.OnAfterRender(firstRender);
