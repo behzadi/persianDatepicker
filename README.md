@@ -35,6 +35,18 @@ persianDatepicker is A lightweight jQuery plugin that select persian(jalali) dat
     });
 </script>
 ```
+Or in Blazor call the InitDatePicker
+```c#
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+      if (firstRender)
+      {
+          await JSRuntime.InvokeVoidAsync("InitDatePicker", StartDate, EndDate);
+      }
+
+      base.OnAfterRender(firstRender);
+  }
+```
 
 ## Options
 To customize persian datepicker, simply pass in an options object: (defaults shown)
